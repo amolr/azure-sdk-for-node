@@ -56,9 +56,9 @@ declare class NotificationHubsManagementClient extends AzureServiceClient {
 
   // Operation groups
   namespaces: operations.Namespaces;
-  name: operations.Name;
+  authorizationRules: operations.AuthorizationRules;
   notificationHubs: operations.NotificationHubs;
-  hubs: operations.Hubs;
+  hubAuthorizationRules: operations.HubAuthorizationRules;
 }
 
 export = NotificationHubsManagementClient;

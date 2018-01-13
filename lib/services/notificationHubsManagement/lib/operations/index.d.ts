@@ -30,26 +30,6 @@ export interface Namespaces {
      *
      * @param {string} parameters.name Resource name
      *
-     * @param {string} parameters.location Resource location
-     *
-     * @param {object} [parameters.tags] Resource tags
-     *
-     * @param {object} [parameters.sku] The sku of the created namespace
-     *
-     * @param {string} parameters.sku.name Name of the notification hub sku.
-     * Possible values include: 'Free', 'Basic', 'Standard'
-     *
-     * @param {string} [parameters.sku.tier] The tier of particular sku
-     *
-     * @param {string} [parameters.sku.size] The Sku size
-     *
-     * @param {string} [parameters.sku.family] The Sku Family
-     *
-     * @param {number} [parameters.sku.capacity] The capacity of the resource
-     *
-     * @param {boolean} [parameters.isAvailiable] True if the name is available and
-     * can be used to create new Namespace/NotificationHub. Otherwise false.
-     *
      * @param {object} [options] Optional Parameters.
      *
      * @param {object} [options.customHeaders] Headers that will be added to the
@@ -57,11 +37,11 @@ export interface Namespaces {
      *
      * @returns {Promise} A promise is returned
      *
-     * @resolve {HttpOperationResponse<CheckAvailabilityResult>} - The deserialized result object.
+     * @resolve {HttpOperationResponse<CheckNameAvailabilityResponse>} - The deserialized result object.
      *
      * @reject {Error|ServiceError} - The error object.
      */
-    checkAvailabilityWithHttpOperationResponse(parameters: models.CheckAvailabilityParameters, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.CheckAvailabilityResult>>;
+    checkAvailabilityWithHttpOperationResponse(parameters: models.CheckNameAvailabilityRequestParameters, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.CheckNameAvailabilityResponse>>;
 
     /**
      * Checks the availability of the given service namespace across all Azure
@@ -72,26 +52,6 @@ export interface Namespaces {
      *
      * @param {string} parameters.name Resource name
      *
-     * @param {string} parameters.location Resource location
-     *
-     * @param {object} [parameters.tags] Resource tags
-     *
-     * @param {object} [parameters.sku] The sku of the created namespace
-     *
-     * @param {string} parameters.sku.name Name of the notification hub sku.
-     * Possible values include: 'Free', 'Basic', 'Standard'
-     *
-     * @param {string} [parameters.sku.tier] The tier of particular sku
-     *
-     * @param {string} [parameters.sku.size] The Sku size
-     *
-     * @param {string} [parameters.sku.family] The Sku Family
-     *
-     * @param {number} [parameters.sku.capacity] The capacity of the resource
-     *
-     * @param {boolean} [parameters.isAvailiable] True if the name is available and
-     * can be used to create new Namespace/NotificationHub. Otherwise false.
-     *
      * @param {object} [options] Optional Parameters.
      *
      * @param {object} [options.customHeaders] Headers that will be added to the
@@ -104,7 +64,7 @@ export interface Namespaces {
      *
      * {Promise} A promise is returned.
      *
-     *                      @resolve {CheckAvailabilityResult} - The deserialized result object.
+     *                      @resolve {CheckNameAvailabilityResponse} - The deserialized result object.
      *
      *                      @reject {Error|ServiceError} - The error object.
      *
@@ -112,17 +72,17 @@ export interface Namespaces {
      *
      *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
      *
-     *                      {CheckAvailabilityResult} [result]   - The deserialized result object if an error did not occur.
-     *                      See {@link CheckAvailabilityResult} for more
+     *                      {CheckNameAvailabilityResponse} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link CheckNameAvailabilityResponse} for more
      *                      information.
      *
      *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
      *
      *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
      */
-    checkAvailability(parameters: models.CheckAvailabilityParameters, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.CheckAvailabilityResult>;
-    checkAvailability(parameters: models.CheckAvailabilityParameters, callback: ServiceCallback<models.CheckAvailabilityResult>): void;
-    checkAvailability(parameters: models.CheckAvailabilityParameters, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.CheckAvailabilityResult>): void;
+    checkAvailability(parameters: models.CheckNameAvailabilityRequestParameters, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.CheckNameAvailabilityResponse>;
+    checkAvailability(parameters: models.CheckNameAvailabilityRequestParameters, callback: ServiceCallback<models.CheckNameAvailabilityResponse>): void;
+    checkAvailability(parameters: models.CheckNameAvailabilityRequestParameters, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.CheckNameAvailabilityResponse>): void;
 
 
     /**
@@ -136,8 +96,8 @@ export interface Namespaces {
      * @param {object} parameters Parameters supplied to create a Namespace
      * Resource.
      *
-     * @param {string} [parameters.namespaceCreateOrUpdateParametersName] The name
-     * of the namespace.
+     * @param {string} [parameters.namespaceResourceName] The name of the
+     * namespace.
      *
      * @param {string} [parameters.provisioningState] Provisioning state of the
      * Namespace.
@@ -171,7 +131,132 @@ export interface Namespaces {
      * @param {string} [parameters.namespaceType] The namespace type. Possible
      * values include: 'Messaging', 'NotificationHub'
      *
-     * @param {string} parameters.location Resource location
+     * @param {object} [parameters.sku] The sku of the created namespace
+     *
+     * @param {string} parameters.sku.name Name of the notification hub sku.
+     * Possible values include: 'Free', 'Basic', 'Standard'
+     *
+     * @param {string} [parameters.sku.tier] The tier of particular sku
+     *
+     * @param {string} [parameters.sku.size] The Sku size
+     *
+     * @param {string} [parameters.sku.family] The Sku Family
+     *
+     * @param {number} [parameters.sku.capacity] The capacity of the resource
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<NamespaceResource>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
+     */
+    createOrUpdateWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, parameters: models.NamespaceResource, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.NamespaceResource>>;
+
+    /**
+     * Creates/Updates a service namespace. Once created, this namespace's resource
+     * manifest is immutable. This operation is idempotent.
+     *
+     * @param {string} resourceGroupName The name of the resource group.
+     *
+     * @param {string} namespaceName The namespace name.
+     *
+     * @param {object} parameters Parameters supplied to create a Namespace
+     * Resource.
+     *
+     * @param {string} [parameters.namespaceResourceName] The name of the
+     * namespace.
+     *
+     * @param {string} [parameters.provisioningState] Provisioning state of the
+     * Namespace.
+     *
+     * @param {string} [parameters.region] Specifies the targeted region in which
+     * the namespace should be created. It can be any of the following values:
+     * Australia EastAustralia SoutheastCentral USEast USEast US 2West USNorth
+     * Central USSouth Central USEast AsiaSoutheast AsiaBrazil SouthJapan EastJapan
+     * WestNorth EuropeWest Europe
+     *
+     * @param {string} [parameters.status] Status of the namespace. It can be any
+     * of these values:1 = Created/Active2 = Creating3 = Suspended4 = Deleting
+     *
+     * @param {date} [parameters.createdAt] The time the namespace was created.
+     *
+     * @param {string} [parameters.serviceBusEndpoint] Endpoint you can use to
+     * perform NotificationHub operations.
+     *
+     * @param {string} [parameters.subscriptionId] The Id of the Azure subscription
+     * associated with the namespace.
+     *
+     * @param {string} [parameters.scaleUnit] ScaleUnit where the namespace gets
+     * created
+     *
+     * @param {boolean} [parameters.enabled] Whether or not the namespace is
+     * currently enabled.
+     *
+     * @param {boolean} [parameters.critical] Whether or not the namespace is set
+     * as Critical.
+     *
+     * @param {string} [parameters.namespaceType] The namespace type. Possible
+     * values include: 'Messaging', 'NotificationHub'
+     *
+     * @param {object} [parameters.sku] The sku of the created namespace
+     *
+     * @param {string} parameters.sku.name Name of the notification hub sku.
+     * Possible values include: 'Free', 'Basic', 'Standard'
+     *
+     * @param {string} [parameters.sku.tier] The tier of particular sku
+     *
+     * @param {string} [parameters.sku.size] The Sku size
+     *
+     * @param {string} [parameters.sku.family] The Sku Family
+     *
+     * @param {number} [parameters.sku.capacity] The capacity of the resource
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {NamespaceResource} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {NamespaceResource} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link NamespaceResource} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    createOrUpdate(resourceGroupName: string, namespaceName: string, parameters: models.NamespaceResource, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.NamespaceResource>;
+    createOrUpdate(resourceGroupName: string, namespaceName: string, parameters: models.NamespaceResource, callback: ServiceCallback<models.NamespaceResource>): void;
+    createOrUpdate(resourceGroupName: string, namespaceName: string, parameters: models.NamespaceResource, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.NamespaceResource>): void;
+
+
+    /**
+     * Patches the existing namespace
+     *
+     * @param {string} resourceGroupName The name of the resource group.
+     *
+     * @param {string} namespaceName The namespace name.
+     *
+     * @param {object} parameters Parameters supplied to patch a Namespace
+     * Resource.
      *
      * @param {object} [parameters.tags] Resource tags
      *
@@ -199,55 +284,17 @@ export interface Namespaces {
      *
      * @reject {Error|ServiceError} - The error object.
      */
-    createOrUpdateWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, parameters: models.NamespaceCreateOrUpdateParameters, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.NamespaceResource>>;
+    updateWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, parameters: models.NamespacePatchParameters, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.NamespaceResource>>;
 
     /**
-     * Creates/Updates a service namespace. Once created, this namespace's resource
-     * manifest is immutable. This operation is idempotent.
+     * Patches the existing namespace
      *
      * @param {string} resourceGroupName The name of the resource group.
      *
      * @param {string} namespaceName The namespace name.
      *
-     * @param {object} parameters Parameters supplied to create a Namespace
+     * @param {object} parameters Parameters supplied to patch a Namespace
      * Resource.
-     *
-     * @param {string} [parameters.namespaceCreateOrUpdateParametersName] The name
-     * of the namespace.
-     *
-     * @param {string} [parameters.provisioningState] Provisioning state of the
-     * Namespace.
-     *
-     * @param {string} [parameters.region] Specifies the targeted region in which
-     * the namespace should be created. It can be any of the following values:
-     * Australia EastAustralia SoutheastCentral USEast USEast US 2West USNorth
-     * Central USSouth Central USEast AsiaSoutheast AsiaBrazil SouthJapan EastJapan
-     * WestNorth EuropeWest Europe
-     *
-     * @param {string} [parameters.status] Status of the namespace. It can be any
-     * of these values:1 = Created/Active2 = Creating3 = Suspended4 = Deleting
-     *
-     * @param {date} [parameters.createdAt] The time the namespace was created.
-     *
-     * @param {string} [parameters.serviceBusEndpoint] Endpoint you can use to
-     * perform NotificationHub operations.
-     *
-     * @param {string} [parameters.subscriptionId] The Id of the Azure subscription
-     * associated with the namespace.
-     *
-     * @param {string} [parameters.scaleUnit] ScaleUnit where the namespace gets
-     * created
-     *
-     * @param {boolean} [parameters.enabled] Whether or not the namespace is
-     * currently enabled.
-     *
-     * @param {boolean} [parameters.critical] Whether or not the namespace is set
-     * as Critical.
-     *
-     * @param {string} [parameters.namespaceType] The namespace type. Possible
-     * values include: 'Messaging', 'NotificationHub'
-     *
-     * @param {string} parameters.location Resource location
      *
      * @param {object} [parameters.tags] Resource tags
      *
@@ -291,104 +338,9 @@ export interface Namespaces {
      *
      *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
      */
-    createOrUpdate(resourceGroupName: string, namespaceName: string, parameters: models.NamespaceCreateOrUpdateParameters, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.NamespaceResource>;
-    createOrUpdate(resourceGroupName: string, namespaceName: string, parameters: models.NamespaceCreateOrUpdateParameters, callback: ServiceCallback<models.NamespaceResource>): void;
-    createOrUpdate(resourceGroupName: string, namespaceName: string, parameters: models.NamespaceCreateOrUpdateParameters, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.NamespaceResource>): void;
-
-
-    /**
-     * Patches the existing namespace
-     *
-     * @param {string} resourceGroupName The name of the resource group.
-     *
-     * @param {string} namespaceName The namespace name.
-     *
-     * @param {object} parameters Parameters supplied to patch a Namespace
-     * Resource.
-     *
-     * @param {object} [parameters.tags] Resource tags
-     *
-     * @param {object} [parameters.sku] The sku of the created namespace
-     *
-     * @param {string} parameters.sku.name Name of the notification hub sku.
-     * Possible values include: 'Free', 'Basic', 'Standard'
-     *
-     * @param {string} [parameters.sku.tier] The tier of particular sku
-     *
-     * @param {string} [parameters.sku.size] The Sku size
-     *
-     * @param {string} [parameters.sku.family] The Sku Family
-     *
-     * @param {number} [parameters.sku.capacity] The capacity of the resource
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @returns {Promise} A promise is returned
-     *
-     * @resolve {HttpOperationResponse<NamespaceResource>} - The deserialized result object.
-     *
-     * @reject {Error|ServiceError} - The error object.
-     */
-    patchWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, parameters: models.NamespacePatchParameters, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.NamespaceResource>>;
-
-    /**
-     * Patches the existing namespace
-     *
-     * @param {string} resourceGroupName The name of the resource group.
-     *
-     * @param {string} namespaceName The namespace name.
-     *
-     * @param {object} parameters Parameters supplied to patch a Namespace
-     * Resource.
-     *
-     * @param {object} [parameters.tags] Resource tags
-     *
-     * @param {object} [parameters.sku] The sku of the created namespace
-     *
-     * @param {string} parameters.sku.name Name of the notification hub sku.
-     * Possible values include: 'Free', 'Basic', 'Standard'
-     *
-     * @param {string} [parameters.sku.tier] The tier of particular sku
-     *
-     * @param {string} [parameters.sku.size] The Sku size
-     *
-     * @param {string} [parameters.sku.family] The Sku Family
-     *
-     * @param {number} [parameters.sku.capacity] The capacity of the resource
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @param {ServiceCallback} [optionalCallback] - The optional callback.
-     *
-     * @returns {ServiceCallback|Promise} If a callback was passed as the last
-     * parameter then it returns the callback else returns a Promise.
-     *
-     * {Promise} A promise is returned.
-     *
-     *                      @resolve {NamespaceResource} - The deserialized result object.
-     *
-     *                      @reject {Error|ServiceError} - The error object.
-     *
-     * {ServiceCallback} optionalCallback(err, result, request, response)
-     *
-     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {NamespaceResource} [result]   - The deserialized result object if an error did not occur.
-     *                      See {@link NamespaceResource} for more information.
-     *
-     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
-     */
-    patch(resourceGroupName: string, namespaceName: string, parameters: models.NamespacePatchParameters, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.NamespaceResource>;
-    patch(resourceGroupName: string, namespaceName: string, parameters: models.NamespacePatchParameters, callback: ServiceCallback<models.NamespaceResource>): void;
-    patch(resourceGroupName: string, namespaceName: string, parameters: models.NamespacePatchParameters, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.NamespaceResource>): void;
+    update(resourceGroupName: string, namespaceName: string, parameters: models.NamespacePatchParameters, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.NamespaceResource>;
+    update(resourceGroupName: string, namespaceName: string, parameters: models.NamespacePatchParameters, callback: ServiceCallback<models.NamespaceResource>): void;
+    update(resourceGroupName: string, namespaceName: string, parameters: models.NamespacePatchParameters, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.NamespaceResource>): void;
 
 
     /**
@@ -511,246 +463,6 @@ export interface Namespaces {
 
 
     /**
-     * Creates an authorization rule for a namespace
-     *
-     * @param {string} resourceGroupName The name of the resource group.
-     *
-     * @param {string} namespaceName The namespace name.
-     *
-     * @param {string} authorizationRuleName Aauthorization Rule Name.
-     *
-     * @param {object} parameters The shared access authorization rule.
-     *
-     * @param {object} parameters.properties Properties of the Namespace
-     * AuthorizationRules.
-     *
-     * @param {array} [parameters.properties.rights] The rights associated with the
-     * rule.
-     *
-     * @param {string} parameters.location Resource location
-     *
-     * @param {object} [parameters.tags] Resource tags
-     *
-     * @param {object} [parameters.sku] The sku of the created namespace
-     *
-     * @param {string} parameters.sku.name Name of the notification hub sku.
-     * Possible values include: 'Free', 'Basic', 'Standard'
-     *
-     * @param {string} [parameters.sku.tier] The tier of particular sku
-     *
-     * @param {string} [parameters.sku.size] The Sku size
-     *
-     * @param {string} [parameters.sku.family] The Sku Family
-     *
-     * @param {number} [parameters.sku.capacity] The capacity of the resource
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @returns {Promise} A promise is returned
-     *
-     * @resolve {HttpOperationResponse<SharedAccessAuthorizationRuleResource>} - The deserialized result object.
-     *
-     * @reject {Error|ServiceError} - The error object.
-     */
-    createOrUpdateAuthorizationRuleWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, authorizationRuleName: string, parameters: models.SharedAccessAuthorizationRuleCreateOrUpdateParameters, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.SharedAccessAuthorizationRuleResource>>;
-
-    /**
-     * Creates an authorization rule for a namespace
-     *
-     * @param {string} resourceGroupName The name of the resource group.
-     *
-     * @param {string} namespaceName The namespace name.
-     *
-     * @param {string} authorizationRuleName Aauthorization Rule Name.
-     *
-     * @param {object} parameters The shared access authorization rule.
-     *
-     * @param {object} parameters.properties Properties of the Namespace
-     * AuthorizationRules.
-     *
-     * @param {array} [parameters.properties.rights] The rights associated with the
-     * rule.
-     *
-     * @param {string} parameters.location Resource location
-     *
-     * @param {object} [parameters.tags] Resource tags
-     *
-     * @param {object} [parameters.sku] The sku of the created namespace
-     *
-     * @param {string} parameters.sku.name Name of the notification hub sku.
-     * Possible values include: 'Free', 'Basic', 'Standard'
-     *
-     * @param {string} [parameters.sku.tier] The tier of particular sku
-     *
-     * @param {string} [parameters.sku.size] The Sku size
-     *
-     * @param {string} [parameters.sku.family] The Sku Family
-     *
-     * @param {number} [parameters.sku.capacity] The capacity of the resource
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @param {ServiceCallback} [optionalCallback] - The optional callback.
-     *
-     * @returns {ServiceCallback|Promise} If a callback was passed as the last
-     * parameter then it returns the callback else returns a Promise.
-     *
-     * {Promise} A promise is returned.
-     *
-     *                      @resolve {SharedAccessAuthorizationRuleResource} - The deserialized result object.
-     *
-     *                      @reject {Error|ServiceError} - The error object.
-     *
-     * {ServiceCallback} optionalCallback(err, result, request, response)
-     *
-     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {SharedAccessAuthorizationRuleResource} [result]   - The deserialized result object if an error did not occur.
-     *                      See {@link SharedAccessAuthorizationRuleResource} for
-     *                      more information.
-     *
-     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
-     */
-    createOrUpdateAuthorizationRule(resourceGroupName: string, namespaceName: string, authorizationRuleName: string, parameters: models.SharedAccessAuthorizationRuleCreateOrUpdateParameters, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.SharedAccessAuthorizationRuleResource>;
-    createOrUpdateAuthorizationRule(resourceGroupName: string, namespaceName: string, authorizationRuleName: string, parameters: models.SharedAccessAuthorizationRuleCreateOrUpdateParameters, callback: ServiceCallback<models.SharedAccessAuthorizationRuleResource>): void;
-    createOrUpdateAuthorizationRule(resourceGroupName: string, namespaceName: string, authorizationRuleName: string, parameters: models.SharedAccessAuthorizationRuleCreateOrUpdateParameters, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SharedAccessAuthorizationRuleResource>): void;
-
-
-    /**
-     * Deletes a namespace authorization rule
-     *
-     * @param {string} resourceGroupName The name of the resource group.
-     *
-     * @param {string} namespaceName The namespace name.
-     *
-     * @param {string} authorizationRuleName Authorization Rule Name.
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @returns {Promise} A promise is returned
-     *
-     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
-     *
-     * @reject {Error|ServiceError} - The error object.
-     */
-    deleteAuthorizationRuleWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, authorizationRuleName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
-
-    /**
-     * Deletes a namespace authorization rule
-     *
-     * @param {string} resourceGroupName The name of the resource group.
-     *
-     * @param {string} namespaceName The namespace name.
-     *
-     * @param {string} authorizationRuleName Authorization Rule Name.
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @param {ServiceCallback} [optionalCallback] - The optional callback.
-     *
-     * @returns {ServiceCallback|Promise} If a callback was passed as the last
-     * parameter then it returns the callback else returns a Promise.
-     *
-     * {Promise} A promise is returned.
-     *
-     *                      @resolve {null} - The deserialized result object.
-     *
-     *                      @reject {Error|ServiceError} - The error object.
-     *
-     * {ServiceCallback} optionalCallback(err, result, request, response)
-     *
-     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object if an error did not occur.
-     *
-     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
-     */
-    deleteAuthorizationRule(resourceGroupName: string, namespaceName: string, authorizationRuleName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
-    deleteAuthorizationRule(resourceGroupName: string, namespaceName: string, authorizationRuleName: string, callback: ServiceCallback<void>): void;
-    deleteAuthorizationRule(resourceGroupName: string, namespaceName: string, authorizationRuleName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-
-
-    /**
-     * Gets an authorization rule for a namespace by name.
-     *
-     * @param {string} resourceGroupName The name of the resource group.
-     *
-     * @param {string} namespaceName The namespace name
-     *
-     * @param {string} authorizationRuleName Authorization rule name.
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @returns {Promise} A promise is returned
-     *
-     * @resolve {HttpOperationResponse<SharedAccessAuthorizationRuleResource>} - The deserialized result object.
-     *
-     * @reject {Error|ServiceError} - The error object.
-     */
-    getAuthorizationRuleWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, authorizationRuleName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.SharedAccessAuthorizationRuleResource>>;
-
-    /**
-     * Gets an authorization rule for a namespace by name.
-     *
-     * @param {string} resourceGroupName The name of the resource group.
-     *
-     * @param {string} namespaceName The namespace name
-     *
-     * @param {string} authorizationRuleName Authorization rule name.
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @param {ServiceCallback} [optionalCallback] - The optional callback.
-     *
-     * @returns {ServiceCallback|Promise} If a callback was passed as the last
-     * parameter then it returns the callback else returns a Promise.
-     *
-     * {Promise} A promise is returned.
-     *
-     *                      @resolve {SharedAccessAuthorizationRuleResource} - The deserialized result object.
-     *
-     *                      @reject {Error|ServiceError} - The error object.
-     *
-     * {ServiceCallback} optionalCallback(err, result, request, response)
-     *
-     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {SharedAccessAuthorizationRuleResource} [result]   - The deserialized result object if an error did not occur.
-     *                      See {@link SharedAccessAuthorizationRuleResource} for
-     *                      more information.
-     *
-     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
-     */
-    getAuthorizationRule(resourceGroupName: string, namespaceName: string, authorizationRuleName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.SharedAccessAuthorizationRuleResource>;
-    getAuthorizationRule(resourceGroupName: string, namespaceName: string, authorizationRuleName: string, callback: ServiceCallback<models.SharedAccessAuthorizationRuleResource>): void;
-    getAuthorizationRule(resourceGroupName: string, namespaceName: string, authorizationRuleName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SharedAccessAuthorizationRuleResource>): void;
-
-
-    /**
      * Lists the available namespaces within a resourceGroup.
      *
      * @param {string} resourceGroupName The name of the resource group. If
@@ -768,7 +480,7 @@ export interface Namespaces {
      *
      * @reject {Error|ServiceError} - The error object.
      */
-    listWithHttpOperationResponse(resourceGroupName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.NamespaceListResult>>;
+    listByResourceGroupWithHttpOperationResponse(resourceGroupName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.NamespaceListResult>>;
 
     /**
      * Lists the available namespaces within a resourceGroup.
@@ -804,9 +516,9 @@ export interface Namespaces {
      *
      *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
      */
-    list(resourceGroupName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.NamespaceListResult>;
-    list(resourceGroupName: string, callback: ServiceCallback<models.NamespaceListResult>): void;
-    list(resourceGroupName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.NamespaceListResult>): void;
+    listByResourceGroup(resourceGroupName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.NamespaceListResult>;
+    listByResourceGroup(resourceGroupName: string, callback: ServiceCallback<models.NamespaceListResult>): void;
+    listByResourceGroup(resourceGroupName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.NamespaceListResult>): void;
 
 
     /**
@@ -824,7 +536,7 @@ export interface Namespaces {
      *
      * @reject {Error|ServiceError} - The error object.
      */
-    listAllWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.NamespaceListResult>>;
+    listWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.NamespaceListResult>>;
 
     /**
      * Lists all the available namespaces within the subscription irrespective of
@@ -857,69 +569,9 @@ export interface Namespaces {
      *
      *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
      */
-    listAll(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.NamespaceListResult>;
-    listAll(callback: ServiceCallback<models.NamespaceListResult>): void;
-    listAll(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.NamespaceListResult>): void;
-
-
-    /**
-     * Gets the authorization rules for a namespace.
-     *
-     * @param {string} resourceGroupName The name of the resource group.
-     *
-     * @param {string} namespaceName The namespace name
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @returns {Promise} A promise is returned
-     *
-     * @resolve {HttpOperationResponse<SharedAccessAuthorizationRuleListResult>} - The deserialized result object.
-     *
-     * @reject {Error|ServiceError} - The error object.
-     */
-    listAuthorizationRulesWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.SharedAccessAuthorizationRuleListResult>>;
-
-    /**
-     * Gets the authorization rules for a namespace.
-     *
-     * @param {string} resourceGroupName The name of the resource group.
-     *
-     * @param {string} namespaceName The namespace name
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @param {ServiceCallback} [optionalCallback] - The optional callback.
-     *
-     * @returns {ServiceCallback|Promise} If a callback was passed as the last
-     * parameter then it returns the callback else returns a Promise.
-     *
-     * {Promise} A promise is returned.
-     *
-     *                      @resolve {SharedAccessAuthorizationRuleListResult} - The deserialized result object.
-     *
-     *                      @reject {Error|ServiceError} - The error object.
-     *
-     * {ServiceCallback} optionalCallback(err, result, request, response)
-     *
-     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {SharedAccessAuthorizationRuleListResult} [result]   - The deserialized result object if an error did not occur.
-     *                      See {@link SharedAccessAuthorizationRuleListResult} for
-     *                      more information.
-     *
-     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
-     */
-    listAuthorizationRules(resourceGroupName: string, namespaceName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.SharedAccessAuthorizationRuleListResult>;
-    listAuthorizationRules(resourceGroupName: string, namespaceName: string, callback: ServiceCallback<models.SharedAccessAuthorizationRuleListResult>): void;
-    listAuthorizationRules(resourceGroupName: string, namespaceName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SharedAccessAuthorizationRuleListResult>): void;
+    list(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.NamespaceListResult>;
+    list(callback: ServiceCallback<models.NamespaceListResult>): void;
+    list(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.NamespaceListResult>): void;
 
 
     /**
@@ -1143,7 +795,7 @@ export interface Namespaces {
      *
      * @reject {Error|ServiceError} - The error object.
      */
-    listNextWithHttpOperationResponse(nextPageLink: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.NamespaceListResult>>;
+    listByResourceGroupNextWithHttpOperationResponse(nextPageLink: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.NamespaceListResult>>;
 
     /**
      * Lists the available namespaces within a resourceGroup.
@@ -1178,9 +830,9 @@ export interface Namespaces {
      *
      *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
      */
-    listNext(nextPageLink: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.NamespaceListResult>;
-    listNext(nextPageLink: string, callback: ServiceCallback<models.NamespaceListResult>): void;
-    listNext(nextPageLink: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.NamespaceListResult>): void;
+    listByResourceGroupNext(nextPageLink: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.NamespaceListResult>;
+    listByResourceGroupNext(nextPageLink: string, callback: ServiceCallback<models.NamespaceListResult>): void;
+    listByResourceGroupNext(nextPageLink: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.NamespaceListResult>): void;
 
 
     /**
@@ -1201,7 +853,7 @@ export interface Namespaces {
      *
      * @reject {Error|ServiceError} - The error object.
      */
-    listAllNextWithHttpOperationResponse(nextPageLink: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.NamespaceListResult>>;
+    listNextWithHttpOperationResponse(nextPageLink: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.NamespaceListResult>>;
 
     /**
      * Lists all the available namespaces within the subscription irrespective of
@@ -1237,16 +889,250 @@ export interface Namespaces {
      *
      *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
      */
-    listAllNext(nextPageLink: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.NamespaceListResult>;
-    listAllNext(nextPageLink: string, callback: ServiceCallback<models.NamespaceListResult>): void;
-    listAllNext(nextPageLink: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.NamespaceListResult>): void;
+    listNext(nextPageLink: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.NamespaceListResult>;
+    listNext(nextPageLink: string, callback: ServiceCallback<models.NamespaceListResult>): void;
+    listNext(nextPageLink: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.NamespaceListResult>): void;
+}
+
+/**
+ * @class
+ * AuthorizationRules
+ * __NOTE__: An instance of this class is automatically created for an
+ * instance of the NotificationHubsManagementClient.
+ */
+export interface AuthorizationRules {
+
+
+    /**
+     * Creates an authorization rule for a namespace
+     *
+     * @param {string} resourceGroupName The name of the resource group.
+     *
+     * @param {string} namespaceName The namespace name.
+     *
+     * @param {string} authorizationRuleName Authorization Rule Name.
+     *
+     * @param {object} parameters The shared access authorization rule.
+     *
+     * @param {array} [parameters.rights] The rights associated with the rule.
+     *
+     * @param {object} [parameters.sku] The sku of the created namespace
+     *
+     * @param {string} parameters.sku.name Name of the notification hub sku.
+     * Possible values include: 'Free', 'Basic', 'Standard'
+     *
+     * @param {string} [parameters.sku.tier] The tier of particular sku
+     *
+     * @param {string} [parameters.sku.size] The Sku size
+     *
+     * @param {string} [parameters.sku.family] The Sku Family
+     *
+     * @param {number} [parameters.sku.capacity] The capacity of the resource
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<SharedAccessAuthorizationRule>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
+     */
+    createOrUpdateWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, authorizationRuleName: string, parameters: models.SharedAccessAuthorizationRule, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.SharedAccessAuthorizationRule>>;
+
+    /**
+     * Creates an authorization rule for a namespace
+     *
+     * @param {string} resourceGroupName The name of the resource group.
+     *
+     * @param {string} namespaceName The namespace name.
+     *
+     * @param {string} authorizationRuleName Authorization Rule Name.
+     *
+     * @param {object} parameters The shared access authorization rule.
+     *
+     * @param {array} [parameters.rights] The rights associated with the rule.
+     *
+     * @param {object} [parameters.sku] The sku of the created namespace
+     *
+     * @param {string} parameters.sku.name Name of the notification hub sku.
+     * Possible values include: 'Free', 'Basic', 'Standard'
+     *
+     * @param {string} [parameters.sku.tier] The tier of particular sku
+     *
+     * @param {string} [parameters.sku.size] The Sku size
+     *
+     * @param {string} [parameters.sku.family] The Sku Family
+     *
+     * @param {number} [parameters.sku.capacity] The capacity of the resource
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {SharedAccessAuthorizationRule} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {SharedAccessAuthorizationRule} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link SharedAccessAuthorizationRule} for more
+     *                      information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    createOrUpdate(resourceGroupName: string, namespaceName: string, authorizationRuleName: string, parameters: models.SharedAccessAuthorizationRule, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.SharedAccessAuthorizationRule>;
+    createOrUpdate(resourceGroupName: string, namespaceName: string, authorizationRuleName: string, parameters: models.SharedAccessAuthorizationRule, callback: ServiceCallback<models.SharedAccessAuthorizationRule>): void;
+    createOrUpdate(resourceGroupName: string, namespaceName: string, authorizationRuleName: string, parameters: models.SharedAccessAuthorizationRule, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SharedAccessAuthorizationRule>): void;
+
+
+    /**
+     * Deletes a namespace authorization rule
+     *
+     * @param {string} resourceGroupName The name of the resource group.
+     *
+     * @param {string} namespaceName The namespace name.
+     *
+     * @param {string} authorizationRuleName Authorization Rule Name.
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
+     */
+    deleteMethodWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, authorizationRuleName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Deletes a namespace authorization rule
+     *
+     * @param {string} resourceGroupName The name of the resource group.
+     *
+     * @param {string} namespaceName The namespace name.
+     *
+     * @param {string} authorizationRuleName Authorization Rule Name.
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    deleteMethod(resourceGroupName: string, namespaceName: string, authorizationRuleName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
+    deleteMethod(resourceGroupName: string, namespaceName: string, authorizationRuleName: string, callback: ServiceCallback<void>): void;
+    deleteMethod(resourceGroupName: string, namespaceName: string, authorizationRuleName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
+
+    /**
+     * Gets an authorization rule for a namespace by name.
+     *
+     * @param {string} resourceGroupName The name of the resource group.
+     *
+     * @param {string} namespaceName The namespace name
+     *
+     * @param {string} authorizationRuleName Authorization rule name.
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<SharedAccessAuthorizationRule>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
+     */
+    getWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, authorizationRuleName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.SharedAccessAuthorizationRule>>;
+
+    /**
+     * Gets an authorization rule for a namespace by name.
+     *
+     * @param {string} resourceGroupName The name of the resource group.
+     *
+     * @param {string} namespaceName The namespace name
+     *
+     * @param {string} authorizationRuleName Authorization rule name.
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {SharedAccessAuthorizationRule} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {SharedAccessAuthorizationRule} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link SharedAccessAuthorizationRule} for more
+     *                      information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get(resourceGroupName: string, namespaceName: string, authorizationRuleName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.SharedAccessAuthorizationRule>;
+    get(resourceGroupName: string, namespaceName: string, authorizationRuleName: string, callback: ServiceCallback<models.SharedAccessAuthorizationRule>): void;
+    get(resourceGroupName: string, namespaceName: string, authorizationRuleName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SharedAccessAuthorizationRule>): void;
 
 
     /**
      * Gets the authorization rules for a namespace.
      *
-     * @param {string} nextPageLink The NextLink from the previous successful call
-     * to List operation.
+     * @param {string} resourceGroupName The name of the resource group.
+     *
+     * @param {string} namespace The namespace name
      *
      * @param {object} [options] Optional Parameters.
      *
@@ -1259,13 +1145,14 @@ export interface Namespaces {
      *
      * @reject {Error|ServiceError} - The error object.
      */
-    listAuthorizationRulesNextWithHttpOperationResponse(nextPageLink: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.SharedAccessAuthorizationRuleListResult>>;
+    listByNamespaceWithHttpOperationResponse(resourceGroupName: string, namespace: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.SharedAccessAuthorizationRuleListResult>>;
 
     /**
      * Gets the authorization rules for a namespace.
      *
-     * @param {string} nextPageLink The NextLink from the previous successful call
-     * to List operation.
+     * @param {string} resourceGroupName The name of the resource group.
+     *
+     * @param {string} namespace The namespace name
      *
      * @param {object} [options] Optional Parameters.
      *
@@ -1295,915 +1182,9 @@ export interface Namespaces {
      *
      *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
      */
-    listAuthorizationRulesNext(nextPageLink: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.SharedAccessAuthorizationRuleListResult>;
-    listAuthorizationRulesNext(nextPageLink: string, callback: ServiceCallback<models.SharedAccessAuthorizationRuleListResult>): void;
-    listAuthorizationRulesNext(nextPageLink: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SharedAccessAuthorizationRuleListResult>): void;
-}
-
-/**
- * @class
- * Name
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the NotificationHubsManagementClient.
- */
-export interface Name {
-
-
-    /**
-     * Checks the availability of the given service namespace across all Azure
-     * subscriptions. This is useful because the domain name is created based on
-     * the service namespace name.
-     *
-     * @param {object} parameters The namespace name.
-     *
-     * @param {string} parameters.name Resource name
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @returns {Promise} A promise is returned
-     *
-     * @resolve {HttpOperationResponse<CheckNameAvailabilityResponse>} - The deserialized result object.
-     *
-     * @reject {Error|ServiceError} - The error object.
-     */
-    checkAvailabilityWithHttpOperationResponse(parameters: models.CheckNameAvailabilityRequestParameters, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.CheckNameAvailabilityResponse>>;
-
-    /**
-     * Checks the availability of the given service namespace across all Azure
-     * subscriptions. This is useful because the domain name is created based on
-     * the service namespace name.
-     *
-     * @param {object} parameters The namespace name.
-     *
-     * @param {string} parameters.name Resource name
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @param {ServiceCallback} [optionalCallback] - The optional callback.
-     *
-     * @returns {ServiceCallback|Promise} If a callback was passed as the last
-     * parameter then it returns the callback else returns a Promise.
-     *
-     * {Promise} A promise is returned.
-     *
-     *                      @resolve {CheckNameAvailabilityResponse} - The deserialized result object.
-     *
-     *                      @reject {Error|ServiceError} - The error object.
-     *
-     * {ServiceCallback} optionalCallback(err, result, request, response)
-     *
-     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {CheckNameAvailabilityResponse} [result]   - The deserialized result object if an error did not occur.
-     *                      See {@link CheckNameAvailabilityResponse} for more
-     *                      information.
-     *
-     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
-     */
-    checkAvailability(parameters: models.CheckNameAvailabilityRequestParameters, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.CheckNameAvailabilityResponse>;
-    checkAvailability(parameters: models.CheckNameAvailabilityRequestParameters, callback: ServiceCallback<models.CheckNameAvailabilityResponse>): void;
-    checkAvailability(parameters: models.CheckNameAvailabilityRequestParameters, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.CheckNameAvailabilityResponse>): void;
-}
-
-/**
- * @class
- * NotificationHubs
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the NotificationHubsManagementClient.
- */
-export interface NotificationHubs {
-
-
-    /**
-     * Checks the availability of the given notificationHub in a namespace.
-     *
-     * @param {string} resourceGroupName The name of the resource group.
-     *
-     * @param {string} namespaceName The namespace name.
-     *
-     * @param {object} parameters The notificationHub name.
-     *
-     * @param {string} parameters.name Resource name
-     *
-     * @param {string} parameters.location Resource location
-     *
-     * @param {object} [parameters.tags] Resource tags
-     *
-     * @param {object} [parameters.sku] The sku of the created namespace
-     *
-     * @param {string} parameters.sku.name Name of the notification hub sku.
-     * Possible values include: 'Free', 'Basic', 'Standard'
-     *
-     * @param {string} [parameters.sku.tier] The tier of particular sku
-     *
-     * @param {string} [parameters.sku.size] The Sku size
-     *
-     * @param {string} [parameters.sku.family] The Sku Family
-     *
-     * @param {number} [parameters.sku.capacity] The capacity of the resource
-     *
-     * @param {boolean} [parameters.isAvailiable] True if the name is available and
-     * can be used to create new Namespace/NotificationHub. Otherwise false.
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @returns {Promise} A promise is returned
-     *
-     * @resolve {HttpOperationResponse<CheckAvailabilityResult>} - The deserialized result object.
-     *
-     * @reject {Error|ServiceError} - The error object.
-     */
-    checkAvailabilityWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, parameters: models.CheckAvailabilityParameters, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.CheckAvailabilityResult>>;
-
-    /**
-     * Checks the availability of the given notificationHub in a namespace.
-     *
-     * @param {string} resourceGroupName The name of the resource group.
-     *
-     * @param {string} namespaceName The namespace name.
-     *
-     * @param {object} parameters The notificationHub name.
-     *
-     * @param {string} parameters.name Resource name
-     *
-     * @param {string} parameters.location Resource location
-     *
-     * @param {object} [parameters.tags] Resource tags
-     *
-     * @param {object} [parameters.sku] The sku of the created namespace
-     *
-     * @param {string} parameters.sku.name Name of the notification hub sku.
-     * Possible values include: 'Free', 'Basic', 'Standard'
-     *
-     * @param {string} [parameters.sku.tier] The tier of particular sku
-     *
-     * @param {string} [parameters.sku.size] The Sku size
-     *
-     * @param {string} [parameters.sku.family] The Sku Family
-     *
-     * @param {number} [parameters.sku.capacity] The capacity of the resource
-     *
-     * @param {boolean} [parameters.isAvailiable] True if the name is available and
-     * can be used to create new Namespace/NotificationHub. Otherwise false.
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @param {ServiceCallback} [optionalCallback] - The optional callback.
-     *
-     * @returns {ServiceCallback|Promise} If a callback was passed as the last
-     * parameter then it returns the callback else returns a Promise.
-     *
-     * {Promise} A promise is returned.
-     *
-     *                      @resolve {CheckAvailabilityResult} - The deserialized result object.
-     *
-     *                      @reject {Error|ServiceError} - The error object.
-     *
-     * {ServiceCallback} optionalCallback(err, result, request, response)
-     *
-     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {CheckAvailabilityResult} [result]   - The deserialized result object if an error did not occur.
-     *                      See {@link CheckAvailabilityResult} for more
-     *                      information.
-     *
-     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
-     */
-    checkAvailability(resourceGroupName: string, namespaceName: string, parameters: models.CheckAvailabilityParameters, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.CheckAvailabilityResult>;
-    checkAvailability(resourceGroupName: string, namespaceName: string, parameters: models.CheckAvailabilityParameters, callback: ServiceCallback<models.CheckAvailabilityResult>): void;
-    checkAvailability(resourceGroupName: string, namespaceName: string, parameters: models.CheckAvailabilityParameters, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.CheckAvailabilityResult>): void;
-
-
-    /**
-     * Creates/Update a NotificationHub in a namespace.
-     *
-     * @param {string} resourceGroupName The name of the resource group.
-     *
-     * @param {string} namespaceName The namespace name.
-     *
-     * @param {string} notificationHubName The notification hub name.
-     *
-     * @param {object} parameters Parameters supplied to the create/update a
-     * NotificationHub Resource.
-     *
-     * @param {string} [parameters.notificationHubCreateOrUpdateParametersName] The
-     * NotificationHub name.
-     *
-     * @param {string} [parameters.registrationTtl] The RegistrationTtl of the
-     * created NotificationHub
-     *
-     * @param {array} [parameters.authorizationRules] The AuthorizationRules of the
-     * created NotificationHub
-     *
-     * @param {object} [parameters.apnsCredential] The ApnsCredential of the
-     * created NotificationHub
-     *
-     * @param {string} [parameters.apnsCredential.apnsCertificate] The APNS
-     * certificate.
-     *
-     * @param {string} [parameters.apnsCredential.certificateKey] The certificate
-     * key.
-     *
-     * @param {string} [parameters.apnsCredential.endpoint] The endpoint of this
-     * credential.
-     *
-     * @param {string} [parameters.apnsCredential.thumbprint] The Apns certificate
-     * Thumbprint
-     *
-     * @param {string} [parameters.apnsCredential.keyId] A 10-character key
-     * identifier (kid) key, obtained from your developer account
-     *
-     * @param {string} [parameters.apnsCredential.appName] The name of the
-     * application
-     *
-     * @param {string} [parameters.apnsCredential.appId] The issuer (iss)
-     * registered claim key, whose value is your 10-character Team ID, obtained
-     * from your developer account
-     *
-     * @param {string} [parameters.apnsCredential.token] Provider Authentication
-     * Token, obtained through your developer account
-     *
-     * @param {object} [parameters.wnsCredential] The WnsCredential of the created
-     * NotificationHub
-     *
-     * @param {string} [parameters.wnsCredential.packageSid] The package ID for
-     * this credential.
-     *
-     * @param {string} [parameters.wnsCredential.secretKey] The secret key.
-     *
-     * @param {string} [parameters.wnsCredential.windowsLiveEndpoint] The Windows
-     * Live endpoint.
-     *
-     * @param {object} [parameters.gcmCredential] The GcmCredential of the created
-     * NotificationHub
-     *
-     * @param {string} [parameters.gcmCredential.gcmEndpoint] The GCM endpoint.
-     *
-     * @param {string} [parameters.gcmCredential.googleApiKey] The Google API key.
-     *
-     * @param {object} [parameters.mpnsCredential] The MpnsCredential of the
-     * created NotificationHub
-     *
-     * @param {string} [parameters.mpnsCredential.mpnsCertificate] The MPNS
-     * certificate.
-     *
-     * @param {string} [parameters.mpnsCredential.certificateKey] The certificate
-     * key for this credential.
-     *
-     * @param {string} [parameters.mpnsCredential.thumbprint] The Mpns certificate
-     * Thumbprint
-     *
-     * @param {object} [parameters.admCredential] The AdmCredential of the created
-     * NotificationHub
-     *
-     * @param {string} [parameters.admCredential.clientId] The client identifier.
-     *
-     * @param {string} [parameters.admCredential.clientSecret] The credential
-     * secret access key.
-     *
-     * @param {string} [parameters.admCredential.authTokenUrl] The URL of the
-     * authorization token.
-     *
-     * @param {object} [parameters.baiduCredential] The BaiduCredential of the
-     * created NotificationHub
-     *
-     * @param {string} [parameters.baiduCredential.baiduApiKey] Baidu Api Key.
-     *
-     * @param {string} [parameters.baiduCredential.baiduEndPoint] Baidu Endpoint.
-     *
-     * @param {string} [parameters.baiduCredential.baiduSecretKey] Baidu Secret Key
-     *
-     * @param {string} parameters.location Resource location
-     *
-     * @param {object} [parameters.tags] Resource tags
-     *
-     * @param {object} [parameters.sku] The sku of the created namespace
-     *
-     * @param {string} parameters.sku.name Name of the notification hub sku.
-     * Possible values include: 'Free', 'Basic', 'Standard'
-     *
-     * @param {string} [parameters.sku.tier] The tier of particular sku
-     *
-     * @param {string} [parameters.sku.size] The Sku size
-     *
-     * @param {string} [parameters.sku.family] The Sku Family
-     *
-     * @param {number} [parameters.sku.capacity] The capacity of the resource
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @returns {Promise} A promise is returned
-     *
-     * @resolve {HttpOperationResponse<NotificationHubResource>} - The deserialized result object.
-     *
-     * @reject {Error|ServiceError} - The error object.
-     */
-    createOrUpdateWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, notificationHubName: string, parameters: models.NotificationHubCreateOrUpdateParameters, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.NotificationHubResource>>;
-
-    /**
-     * Creates/Update a NotificationHub in a namespace.
-     *
-     * @param {string} resourceGroupName The name of the resource group.
-     *
-     * @param {string} namespaceName The namespace name.
-     *
-     * @param {string} notificationHubName The notification hub name.
-     *
-     * @param {object} parameters Parameters supplied to the create/update a
-     * NotificationHub Resource.
-     *
-     * @param {string} [parameters.notificationHubCreateOrUpdateParametersName] The
-     * NotificationHub name.
-     *
-     * @param {string} [parameters.registrationTtl] The RegistrationTtl of the
-     * created NotificationHub
-     *
-     * @param {array} [parameters.authorizationRules] The AuthorizationRules of the
-     * created NotificationHub
-     *
-     * @param {object} [parameters.apnsCredential] The ApnsCredential of the
-     * created NotificationHub
-     *
-     * @param {string} [parameters.apnsCredential.apnsCertificate] The APNS
-     * certificate.
-     *
-     * @param {string} [parameters.apnsCredential.certificateKey] The certificate
-     * key.
-     *
-     * @param {string} [parameters.apnsCredential.endpoint] The endpoint of this
-     * credential.
-     *
-     * @param {string} [parameters.apnsCredential.thumbprint] The Apns certificate
-     * Thumbprint
-     *
-     * @param {string} [parameters.apnsCredential.keyId] A 10-character key
-     * identifier (kid) key, obtained from your developer account
-     *
-     * @param {string} [parameters.apnsCredential.appName] The name of the
-     * application
-     *
-     * @param {string} [parameters.apnsCredential.appId] The issuer (iss)
-     * registered claim key, whose value is your 10-character Team ID, obtained
-     * from your developer account
-     *
-     * @param {string} [parameters.apnsCredential.token] Provider Authentication
-     * Token, obtained through your developer account
-     *
-     * @param {object} [parameters.wnsCredential] The WnsCredential of the created
-     * NotificationHub
-     *
-     * @param {string} [parameters.wnsCredential.packageSid] The package ID for
-     * this credential.
-     *
-     * @param {string} [parameters.wnsCredential.secretKey] The secret key.
-     *
-     * @param {string} [parameters.wnsCredential.windowsLiveEndpoint] The Windows
-     * Live endpoint.
-     *
-     * @param {object} [parameters.gcmCredential] The GcmCredential of the created
-     * NotificationHub
-     *
-     * @param {string} [parameters.gcmCredential.gcmEndpoint] The GCM endpoint.
-     *
-     * @param {string} [parameters.gcmCredential.googleApiKey] The Google API key.
-     *
-     * @param {object} [parameters.mpnsCredential] The MpnsCredential of the
-     * created NotificationHub
-     *
-     * @param {string} [parameters.mpnsCredential.mpnsCertificate] The MPNS
-     * certificate.
-     *
-     * @param {string} [parameters.mpnsCredential.certificateKey] The certificate
-     * key for this credential.
-     *
-     * @param {string} [parameters.mpnsCredential.thumbprint] The Mpns certificate
-     * Thumbprint
-     *
-     * @param {object} [parameters.admCredential] The AdmCredential of the created
-     * NotificationHub
-     *
-     * @param {string} [parameters.admCredential.clientId] The client identifier.
-     *
-     * @param {string} [parameters.admCredential.clientSecret] The credential
-     * secret access key.
-     *
-     * @param {string} [parameters.admCredential.authTokenUrl] The URL of the
-     * authorization token.
-     *
-     * @param {object} [parameters.baiduCredential] The BaiduCredential of the
-     * created NotificationHub
-     *
-     * @param {string} [parameters.baiduCredential.baiduApiKey] Baidu Api Key.
-     *
-     * @param {string} [parameters.baiduCredential.baiduEndPoint] Baidu Endpoint.
-     *
-     * @param {string} [parameters.baiduCredential.baiduSecretKey] Baidu Secret Key
-     *
-     * @param {string} parameters.location Resource location
-     *
-     * @param {object} [parameters.tags] Resource tags
-     *
-     * @param {object} [parameters.sku] The sku of the created namespace
-     *
-     * @param {string} parameters.sku.name Name of the notification hub sku.
-     * Possible values include: 'Free', 'Basic', 'Standard'
-     *
-     * @param {string} [parameters.sku.tier] The tier of particular sku
-     *
-     * @param {string} [parameters.sku.size] The Sku size
-     *
-     * @param {string} [parameters.sku.family] The Sku Family
-     *
-     * @param {number} [parameters.sku.capacity] The capacity of the resource
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @param {ServiceCallback} [optionalCallback] - The optional callback.
-     *
-     * @returns {ServiceCallback|Promise} If a callback was passed as the last
-     * parameter then it returns the callback else returns a Promise.
-     *
-     * {Promise} A promise is returned.
-     *
-     *                      @resolve {NotificationHubResource} - The deserialized result object.
-     *
-     *                      @reject {Error|ServiceError} - The error object.
-     *
-     * {ServiceCallback} optionalCallback(err, result, request, response)
-     *
-     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {NotificationHubResource} [result]   - The deserialized result object if an error did not occur.
-     *                      See {@link NotificationHubResource} for more
-     *                      information.
-     *
-     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
-     */
-    createOrUpdate(resourceGroupName: string, namespaceName: string, notificationHubName: string, parameters: models.NotificationHubCreateOrUpdateParameters, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.NotificationHubResource>;
-    createOrUpdate(resourceGroupName: string, namespaceName: string, notificationHubName: string, parameters: models.NotificationHubCreateOrUpdateParameters, callback: ServiceCallback<models.NotificationHubResource>): void;
-    createOrUpdate(resourceGroupName: string, namespaceName: string, notificationHubName: string, parameters: models.NotificationHubCreateOrUpdateParameters, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.NotificationHubResource>): void;
-
-
-    /**
-     * Deletes a notification hub associated with a namespace.
-     *
-     * @param {string} resourceGroupName The name of the resource group.
-     *
-     * @param {string} namespaceName The namespace name.
-     *
-     * @param {string} notificationHubName The notification hub name.
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @returns {Promise} A promise is returned
-     *
-     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
-     *
-     * @reject {Error|ServiceError} - The error object.
-     */
-    deleteMethodWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, notificationHubName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
-
-    /**
-     * Deletes a notification hub associated with a namespace.
-     *
-     * @param {string} resourceGroupName The name of the resource group.
-     *
-     * @param {string} namespaceName The namespace name.
-     *
-     * @param {string} notificationHubName The notification hub name.
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @param {ServiceCallback} [optionalCallback] - The optional callback.
-     *
-     * @returns {ServiceCallback|Promise} If a callback was passed as the last
-     * parameter then it returns the callback else returns a Promise.
-     *
-     * {Promise} A promise is returned.
-     *
-     *                      @resolve {null} - The deserialized result object.
-     *
-     *                      @reject {Error|ServiceError} - The error object.
-     *
-     * {ServiceCallback} optionalCallback(err, result, request, response)
-     *
-     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object if an error did not occur.
-     *
-     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
-     */
-    deleteMethod(resourceGroupName: string, namespaceName: string, notificationHubName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
-    deleteMethod(resourceGroupName: string, namespaceName: string, notificationHubName: string, callback: ServiceCallback<void>): void;
-    deleteMethod(resourceGroupName: string, namespaceName: string, notificationHubName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-
-
-    /**
-     * Lists the notification hubs associated with a namespace.
-     *
-     * @param {string} resourceGroupName The name of the resource group.
-     *
-     * @param {string} namespaceName The namespace name.
-     *
-     * @param {string} notificationHubName The notification hub name.
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @returns {Promise} A promise is returned
-     *
-     * @resolve {HttpOperationResponse<NotificationHubResource>} - The deserialized result object.
-     *
-     * @reject {Error|ServiceError} - The error object.
-     */
-    getWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, notificationHubName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.NotificationHubResource>>;
-
-    /**
-     * Lists the notification hubs associated with a namespace.
-     *
-     * @param {string} resourceGroupName The name of the resource group.
-     *
-     * @param {string} namespaceName The namespace name.
-     *
-     * @param {string} notificationHubName The notification hub name.
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @param {ServiceCallback} [optionalCallback] - The optional callback.
-     *
-     * @returns {ServiceCallback|Promise} If a callback was passed as the last
-     * parameter then it returns the callback else returns a Promise.
-     *
-     * {Promise} A promise is returned.
-     *
-     *                      @resolve {NotificationHubResource} - The deserialized result object.
-     *
-     *                      @reject {Error|ServiceError} - The error object.
-     *
-     * {ServiceCallback} optionalCallback(err, result, request, response)
-     *
-     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {NotificationHubResource} [result]   - The deserialized result object if an error did not occur.
-     *                      See {@link NotificationHubResource} for more
-     *                      information.
-     *
-     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
-     */
-    get(resourceGroupName: string, namespaceName: string, notificationHubName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.NotificationHubResource>;
-    get(resourceGroupName: string, namespaceName: string, notificationHubName: string, callback: ServiceCallback<models.NotificationHubResource>): void;
-    get(resourceGroupName: string, namespaceName: string, notificationHubName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.NotificationHubResource>): void;
-
-
-    /**
-     * Creates/Updates an authorization rule for a NotificationHub
-     *
-     * @param {string} resourceGroupName The name of the resource group.
-     *
-     * @param {string} namespaceName The namespace name.
-     *
-     * @param {string} notificationHubName The notification hub name.
-     *
-     * @param {string} authorizationRuleName Authorization Rule Name.
-     *
-     * @param {object} parameters The shared access authorization rule.
-     *
-     * @param {object} parameters.properties Properties of the Namespace
-     * AuthorizationRules.
-     *
-     * @param {array} [parameters.properties.rights] The rights associated with the
-     * rule.
-     *
-     * @param {string} parameters.location Resource location
-     *
-     * @param {object} [parameters.tags] Resource tags
-     *
-     * @param {object} [parameters.sku] The sku of the created namespace
-     *
-     * @param {string} parameters.sku.name Name of the notification hub sku.
-     * Possible values include: 'Free', 'Basic', 'Standard'
-     *
-     * @param {string} [parameters.sku.tier] The tier of particular sku
-     *
-     * @param {string} [parameters.sku.size] The Sku size
-     *
-     * @param {string} [parameters.sku.family] The Sku Family
-     *
-     * @param {number} [parameters.sku.capacity] The capacity of the resource
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @returns {Promise} A promise is returned
-     *
-     * @resolve {HttpOperationResponse<SharedAccessAuthorizationRuleResource>} - The deserialized result object.
-     *
-     * @reject {Error|ServiceError} - The error object.
-     */
-    createOrUpdateAuthorizationRuleWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, notificationHubName: string, authorizationRuleName: string, parameters: models.SharedAccessAuthorizationRuleCreateOrUpdateParameters, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.SharedAccessAuthorizationRuleResource>>;
-
-    /**
-     * Creates/Updates an authorization rule for a NotificationHub
-     *
-     * @param {string} resourceGroupName The name of the resource group.
-     *
-     * @param {string} namespaceName The namespace name.
-     *
-     * @param {string} notificationHubName The notification hub name.
-     *
-     * @param {string} authorizationRuleName Authorization Rule Name.
-     *
-     * @param {object} parameters The shared access authorization rule.
-     *
-     * @param {object} parameters.properties Properties of the Namespace
-     * AuthorizationRules.
-     *
-     * @param {array} [parameters.properties.rights] The rights associated with the
-     * rule.
-     *
-     * @param {string} parameters.location Resource location
-     *
-     * @param {object} [parameters.tags] Resource tags
-     *
-     * @param {object} [parameters.sku] The sku of the created namespace
-     *
-     * @param {string} parameters.sku.name Name of the notification hub sku.
-     * Possible values include: 'Free', 'Basic', 'Standard'
-     *
-     * @param {string} [parameters.sku.tier] The tier of particular sku
-     *
-     * @param {string} [parameters.sku.size] The Sku size
-     *
-     * @param {string} [parameters.sku.family] The Sku Family
-     *
-     * @param {number} [parameters.sku.capacity] The capacity of the resource
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @param {ServiceCallback} [optionalCallback] - The optional callback.
-     *
-     * @returns {ServiceCallback|Promise} If a callback was passed as the last
-     * parameter then it returns the callback else returns a Promise.
-     *
-     * {Promise} A promise is returned.
-     *
-     *                      @resolve {SharedAccessAuthorizationRuleResource} - The deserialized result object.
-     *
-     *                      @reject {Error|ServiceError} - The error object.
-     *
-     * {ServiceCallback} optionalCallback(err, result, request, response)
-     *
-     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {SharedAccessAuthorizationRuleResource} [result]   - The deserialized result object if an error did not occur.
-     *                      See {@link SharedAccessAuthorizationRuleResource} for
-     *                      more information.
-     *
-     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
-     */
-    createOrUpdateAuthorizationRule(resourceGroupName: string, namespaceName: string, notificationHubName: string, authorizationRuleName: string, parameters: models.SharedAccessAuthorizationRuleCreateOrUpdateParameters, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.SharedAccessAuthorizationRuleResource>;
-    createOrUpdateAuthorizationRule(resourceGroupName: string, namespaceName: string, notificationHubName: string, authorizationRuleName: string, parameters: models.SharedAccessAuthorizationRuleCreateOrUpdateParameters, callback: ServiceCallback<models.SharedAccessAuthorizationRuleResource>): void;
-    createOrUpdateAuthorizationRule(resourceGroupName: string, namespaceName: string, notificationHubName: string, authorizationRuleName: string, parameters: models.SharedAccessAuthorizationRuleCreateOrUpdateParameters, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SharedAccessAuthorizationRuleResource>): void;
-
-
-    /**
-     * Deletes a notificationHub authorization rule
-     *
-     * @param {string} resourceGroupName The name of the resource group.
-     *
-     * @param {string} namespaceName The namespace name.
-     *
-     * @param {string} notificationHubName The notification hub name.
-     *
-     * @param {string} authorizationRuleName Authorization Rule Name.
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @returns {Promise} A promise is returned
-     *
-     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
-     *
-     * @reject {Error|ServiceError} - The error object.
-     */
-    deleteAuthorizationRuleWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, notificationHubName: string, authorizationRuleName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
-
-    /**
-     * Deletes a notificationHub authorization rule
-     *
-     * @param {string} resourceGroupName The name of the resource group.
-     *
-     * @param {string} namespaceName The namespace name.
-     *
-     * @param {string} notificationHubName The notification hub name.
-     *
-     * @param {string} authorizationRuleName Authorization Rule Name.
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @param {ServiceCallback} [optionalCallback] - The optional callback.
-     *
-     * @returns {ServiceCallback|Promise} If a callback was passed as the last
-     * parameter then it returns the callback else returns a Promise.
-     *
-     * {Promise} A promise is returned.
-     *
-     *                      @resolve {null} - The deserialized result object.
-     *
-     *                      @reject {Error|ServiceError} - The error object.
-     *
-     * {ServiceCallback} optionalCallback(err, result, request, response)
-     *
-     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object if an error did not occur.
-     *
-     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
-     */
-    deleteAuthorizationRule(resourceGroupName: string, namespaceName: string, notificationHubName: string, authorizationRuleName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
-    deleteAuthorizationRule(resourceGroupName: string, namespaceName: string, notificationHubName: string, authorizationRuleName: string, callback: ServiceCallback<void>): void;
-    deleteAuthorizationRule(resourceGroupName: string, namespaceName: string, notificationHubName: string, authorizationRuleName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-
-
-    /**
-     * Gets an authorization rule for a NotificationHub by name.
-     *
-     * @param {string} resourceGroupName The name of the resource group.
-     *
-     * @param {string} namespaceName The namespace name
-     *
-     * @param {string} notificationHubName The notification hub name.
-     *
-     * @param {string} authorizationRuleName authorization rule name.
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @returns {Promise} A promise is returned
-     *
-     * @resolve {HttpOperationResponse<SharedAccessAuthorizationRuleResource>} - The deserialized result object.
-     *
-     * @reject {Error|ServiceError} - The error object.
-     */
-    getAuthorizationRuleWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, notificationHubName: string, authorizationRuleName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.SharedAccessAuthorizationRuleResource>>;
-
-    /**
-     * Gets an authorization rule for a NotificationHub by name.
-     *
-     * @param {string} resourceGroupName The name of the resource group.
-     *
-     * @param {string} namespaceName The namespace name
-     *
-     * @param {string} notificationHubName The notification hub name.
-     *
-     * @param {string} authorizationRuleName authorization rule name.
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @param {ServiceCallback} [optionalCallback] - The optional callback.
-     *
-     * @returns {ServiceCallback|Promise} If a callback was passed as the last
-     * parameter then it returns the callback else returns a Promise.
-     *
-     * {Promise} A promise is returned.
-     *
-     *                      @resolve {SharedAccessAuthorizationRuleResource} - The deserialized result object.
-     *
-     *                      @reject {Error|ServiceError} - The error object.
-     *
-     * {ServiceCallback} optionalCallback(err, result, request, response)
-     *
-     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {SharedAccessAuthorizationRuleResource} [result]   - The deserialized result object if an error did not occur.
-     *                      See {@link SharedAccessAuthorizationRuleResource} for
-     *                      more information.
-     *
-     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
-     */
-    getAuthorizationRule(resourceGroupName: string, namespaceName: string, notificationHubName: string, authorizationRuleName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.SharedAccessAuthorizationRuleResource>;
-    getAuthorizationRule(resourceGroupName: string, namespaceName: string, notificationHubName: string, authorizationRuleName: string, callback: ServiceCallback<models.SharedAccessAuthorizationRuleResource>): void;
-    getAuthorizationRule(resourceGroupName: string, namespaceName: string, notificationHubName: string, authorizationRuleName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SharedAccessAuthorizationRuleResource>): void;
-
-
-    /**
-     * Lists the notification hubs associated with a namespace.
-     *
-     * @param {string} resourceGroupName The name of the resource group.
-     *
-     * @param {string} namespaceName The namespace name.
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @returns {Promise} A promise is returned
-     *
-     * @resolve {HttpOperationResponse<NotificationHubListResult>} - The deserialized result object.
-     *
-     * @reject {Error|ServiceError} - The error object.
-     */
-    listWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.NotificationHubListResult>>;
-
-    /**
-     * Lists the notification hubs associated with a namespace.
-     *
-     * @param {string} resourceGroupName The name of the resource group.
-     *
-     * @param {string} namespaceName The namespace name.
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @param {ServiceCallback} [optionalCallback] - The optional callback.
-     *
-     * @returns {ServiceCallback|Promise} If a callback was passed as the last
-     * parameter then it returns the callback else returns a Promise.
-     *
-     * {Promise} A promise is returned.
-     *
-     *                      @resolve {NotificationHubListResult} - The deserialized result object.
-     *
-     *                      @reject {Error|ServiceError} - The error object.
-     *
-     * {ServiceCallback} optionalCallback(err, result, request, response)
-     *
-     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {NotificationHubListResult} [result]   - The deserialized result object if an error did not occur.
-     *                      See {@link NotificationHubListResult} for more
-     *                      information.
-     *
-     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
-     */
-    list(resourceGroupName: string, namespaceName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.NotificationHubListResult>;
-    list(resourceGroupName: string, namespaceName: string, callback: ServiceCallback<models.NotificationHubListResult>): void;
-    list(resourceGroupName: string, namespaceName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.NotificationHubListResult>): void;
+    listByNamespace(resourceGroupName: string, namespace: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.SharedAccessAuthorizationRuleListResult>;
+    listByNamespace(resourceGroupName: string, namespace: string, callback: ServiceCallback<models.SharedAccessAuthorizationRuleListResult>): void;
+    listByNamespace(resourceGroupName: string, namespace: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SharedAccessAuthorizationRuleListResult>): void;
 
 
     /**
@@ -2226,7 +1207,7 @@ export interface NotificationHubs {
      *
      * @reject {Error|ServiceError} - The error object.
      */
-    listAuthorizationRulesWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, notificationHubName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.SharedAccessAuthorizationRuleListResult>>;
+    listByNotificationHubWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, notificationHubName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.SharedAccessAuthorizationRuleListResult>>;
 
     /**
      * Gets the authorization rules for a NotificationHub.
@@ -2265,78 +1246,9 @@ export interface NotificationHubs {
      *
      *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
      */
-    listAuthorizationRules(resourceGroupName: string, namespaceName: string, notificationHubName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.SharedAccessAuthorizationRuleListResult>;
-    listAuthorizationRules(resourceGroupName: string, namespaceName: string, notificationHubName: string, callback: ServiceCallback<models.SharedAccessAuthorizationRuleListResult>): void;
-    listAuthorizationRules(resourceGroupName: string, namespaceName: string, notificationHubName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SharedAccessAuthorizationRuleListResult>): void;
-
-
-    /**
-     * Gets the Primary and Secondary ConnectionStrings to the NotificationHub
-     *
-     * @param {string} resourceGroupName The name of the resource group.
-     *
-     * @param {string} namespaceName The namespace name.
-     *
-     * @param {string} notificationHubName The notification hub name.
-     *
-     * @param {string} authorizationRuleName The connection string of the
-     * NotificationHub for the specified authorizationRule.
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @returns {Promise} A promise is returned
-     *
-     * @resolve {HttpOperationResponse<ResourceListKeys>} - The deserialized result object.
-     *
-     * @reject {Error|ServiceError} - The error object.
-     */
-    listKeysWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, notificationHubName: string, authorizationRuleName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ResourceListKeys>>;
-
-    /**
-     * Gets the Primary and Secondary ConnectionStrings to the NotificationHub
-     *
-     * @param {string} resourceGroupName The name of the resource group.
-     *
-     * @param {string} namespaceName The namespace name.
-     *
-     * @param {string} notificationHubName The notification hub name.
-     *
-     * @param {string} authorizationRuleName The connection string of the
-     * NotificationHub for the specified authorizationRule.
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @param {ServiceCallback} [optionalCallback] - The optional callback.
-     *
-     * @returns {ServiceCallback|Promise} If a callback was passed as the last
-     * parameter then it returns the callback else returns a Promise.
-     *
-     * {Promise} A promise is returned.
-     *
-     *                      @resolve {ResourceListKeys} - The deserialized result object.
-     *
-     *                      @reject {Error|ServiceError} - The error object.
-     *
-     * {ServiceCallback} optionalCallback(err, result, request, response)
-     *
-     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {ResourceListKeys} [result]   - The deserialized result object if an error did not occur.
-     *                      See {@link ResourceListKeys} for more information.
-     *
-     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
-     */
-    listKeys(resourceGroupName: string, namespaceName: string, notificationHubName: string, authorizationRuleName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ResourceListKeys>;
-    listKeys(resourceGroupName: string, namespaceName: string, notificationHubName: string, authorizationRuleName: string, callback: ServiceCallback<models.ResourceListKeys>): void;
-    listKeys(resourceGroupName: string, namespaceName: string, notificationHubName: string, authorizationRuleName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ResourceListKeys>): void;
+    listByNotificationHub(resourceGroupName: string, namespaceName: string, notificationHubName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.SharedAccessAuthorizationRuleListResult>;
+    listByNotificationHub(resourceGroupName: string, namespaceName: string, notificationHubName: string, callback: ServiceCallback<models.SharedAccessAuthorizationRuleListResult>): void;
+    listByNotificationHub(resourceGroupName: string, namespaceName: string, notificationHubName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SharedAccessAuthorizationRuleListResult>): void;
 
 
     /**
@@ -2425,6 +1337,947 @@ export interface NotificationHubs {
 
 
     /**
+     * Gets the authorization rules for a namespace.
+     *
+     * @param {string} nextPageLink The NextLink from the previous successful call
+     * to List operation.
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<SharedAccessAuthorizationRuleListResult>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
+     */
+    listByNamespaceNextWithHttpOperationResponse(nextPageLink: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.SharedAccessAuthorizationRuleListResult>>;
+
+    /**
+     * Gets the authorization rules for a namespace.
+     *
+     * @param {string} nextPageLink The NextLink from the previous successful call
+     * to List operation.
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {SharedAccessAuthorizationRuleListResult} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {SharedAccessAuthorizationRuleListResult} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link SharedAccessAuthorizationRuleListResult} for
+     *                      more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    listByNamespaceNext(nextPageLink: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.SharedAccessAuthorizationRuleListResult>;
+    listByNamespaceNext(nextPageLink: string, callback: ServiceCallback<models.SharedAccessAuthorizationRuleListResult>): void;
+    listByNamespaceNext(nextPageLink: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SharedAccessAuthorizationRuleListResult>): void;
+
+
+    /**
+     * Gets the authorization rules for a NotificationHub.
+     *
+     * @param {string} nextPageLink The NextLink from the previous successful call
+     * to List operation.
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<SharedAccessAuthorizationRuleListResult>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
+     */
+    listByNotificationHubNextWithHttpOperationResponse(nextPageLink: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.SharedAccessAuthorizationRuleListResult>>;
+
+    /**
+     * Gets the authorization rules for a NotificationHub.
+     *
+     * @param {string} nextPageLink The NextLink from the previous successful call
+     * to List operation.
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {SharedAccessAuthorizationRuleListResult} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {SharedAccessAuthorizationRuleListResult} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link SharedAccessAuthorizationRuleListResult} for
+     *                      more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    listByNotificationHubNext(nextPageLink: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.SharedAccessAuthorizationRuleListResult>;
+    listByNotificationHubNext(nextPageLink: string, callback: ServiceCallback<models.SharedAccessAuthorizationRuleListResult>): void;
+    listByNotificationHubNext(nextPageLink: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SharedAccessAuthorizationRuleListResult>): void;
+}
+
+/**
+ * @class
+ * NotificationHubs
+ * __NOTE__: An instance of this class is automatically created for an
+ * instance of the NotificationHubsManagementClient.
+ */
+export interface NotificationHubs {
+
+
+    /**
+     * Checks the availability of the given notificationHub in a namespace.
+     *
+     * @param {string} resourceGroupName The name of the resource group.
+     *
+     * @param {string} namespaceName The namespace name.
+     *
+     * @param {object} parameters The notificationHub name.
+     *
+     * @param {string} parameters.name Resource name
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<CheckNameAvailabilityResponse>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
+     */
+    checkAvailabilityWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, parameters: models.CheckNameAvailabilityRequestParameters, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.CheckNameAvailabilityResponse>>;
+
+    /**
+     * Checks the availability of the given notificationHub in a namespace.
+     *
+     * @param {string} resourceGroupName The name of the resource group.
+     *
+     * @param {string} namespaceName The namespace name.
+     *
+     * @param {object} parameters The notificationHub name.
+     *
+     * @param {string} parameters.name Resource name
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {CheckNameAvailabilityResponse} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {CheckNameAvailabilityResponse} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link CheckNameAvailabilityResponse} for more
+     *                      information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    checkAvailability(resourceGroupName: string, namespaceName: string, parameters: models.CheckNameAvailabilityRequestParameters, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.CheckNameAvailabilityResponse>;
+    checkAvailability(resourceGroupName: string, namespaceName: string, parameters: models.CheckNameAvailabilityRequestParameters, callback: ServiceCallback<models.CheckNameAvailabilityResponse>): void;
+    checkAvailability(resourceGroupName: string, namespaceName: string, parameters: models.CheckNameAvailabilityRequestParameters, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.CheckNameAvailabilityResponse>): void;
+
+
+    /**
+     * Creates/Update a NotificationHub in a namespace.
+     *
+     * @param {string} resourceGroupName The name of the resource group.
+     *
+     * @param {string} namespaceName The namespace name.
+     *
+     * @param {string} notificationHubName The notification hub name.
+     *
+     * @param {object} parameters Parameters supplied to the create/update a
+     * NotificationHub Resource.
+     *
+     * @param {string} [parameters.notificationHubName] The NotificationHub name.
+     *
+     * @param {string} [parameters.registrationTtl] The RegistrationTtl of the
+     * created NotificationHub
+     *
+     * @param {array} [parameters.authorizationRules] The AuthorizationRules of the
+     * created NotificationHub
+     *
+     * @param {object} [parameters.apnsCredential] The ApnsCredential of the
+     * created NotificationHub
+     *
+     * @param {string} [parameters.apnsCredential.apnsCertificate] The APNS
+     * certificate.
+     *
+     * @param {string} [parameters.apnsCredential.certificateKey] The certificate
+     * key.
+     *
+     * @param {string} [parameters.apnsCredential.endpoint] The endpoint of this
+     * credential.
+     *
+     * @param {string} [parameters.apnsCredential.thumbprint] The Apns certificate
+     * Thumbprint
+     *
+     * @param {string} [parameters.apnsCredential.keyId] A 10-character key
+     * identifier (kid) key, obtained from your developer account
+     *
+     * @param {string} [parameters.apnsCredential.bundleId] Id that uniquely
+     * identifies an Application Bundle on a device or simulator
+     *
+     * @param {string} [parameters.apnsCredential.teamId] A unique 10 character
+     * string generated by Apple thats assigned to your team
+     *
+     * @param {string} [parameters.apnsCredential.token] Provider Authentication
+     * Token, obtained through your developer account
+     *
+     * @param {object} [parameters.wnsCredential] The WnsCredential of the created
+     * NotificationHub
+     *
+     * @param {string} [parameters.wnsCredential.packageSid] The package ID for
+     * this credential.
+     *
+     * @param {string} [parameters.wnsCredential.secretKey] The secret key.
+     *
+     * @param {string} [parameters.wnsCredential.windowsLiveEndpoint] The Windows
+     * Live endpoint.
+     *
+     * @param {object} [parameters.gcmCredential] The GcmCredential of the created
+     * NotificationHub
+     *
+     * @param {string} [parameters.gcmCredential.gcmEndpoint] The GCM endpoint.
+     *
+     * @param {string} [parameters.gcmCredential.googleApiKey] The Google API key.
+     *
+     * @param {object} [parameters.mpnsCredential] The MpnsCredential of the
+     * created NotificationHub
+     *
+     * @param {string} [parameters.mpnsCredential.mpnsCertificate] The MPNS
+     * certificate.
+     *
+     * @param {string} [parameters.mpnsCredential.certificateKey] The certificate
+     * key for this credential.
+     *
+     * @param {string} [parameters.mpnsCredential.thumbprint] The Mpns certificate
+     * Thumbprint
+     *
+     * @param {object} [parameters.admCredential] The AdmCredential of the created
+     * NotificationHub
+     *
+     * @param {string} [parameters.admCredential.clientId] The client identifier.
+     *
+     * @param {string} [parameters.admCredential.clientSecret] The credential
+     * secret access key.
+     *
+     * @param {string} [parameters.admCredential.authTokenUrl] The URL of the
+     * authorization token.
+     *
+     * @param {object} [parameters.baiduCredential] The BaiduCredential of the
+     * created NotificationHub
+     *
+     * @param {string} [parameters.baiduCredential.baiduApiKey] Baidu Api Key.
+     *
+     * @param {string} [parameters.baiduCredential.baiduEndPoint] Baidu Endpoint.
+     *
+     * @param {string} [parameters.baiduCredential.baiduSecretKey] Baidu Secret Key
+     *
+     * @param {object} [parameters.sku] The sku of the created namespace
+     *
+     * @param {string} parameters.sku.name Name of the notification hub sku.
+     * Possible values include: 'Free', 'Basic', 'Standard'
+     *
+     * @param {string} [parameters.sku.tier] The tier of particular sku
+     *
+     * @param {string} [parameters.sku.size] The Sku size
+     *
+     * @param {string} [parameters.sku.family] The Sku Family
+     *
+     * @param {number} [parameters.sku.capacity] The capacity of the resource
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<NotificationHub>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
+     */
+    createOrUpdateWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, notificationHubName: string, parameters: models.NotificationHub, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.NotificationHub>>;
+
+    /**
+     * Creates/Update a NotificationHub in a namespace.
+     *
+     * @param {string} resourceGroupName The name of the resource group.
+     *
+     * @param {string} namespaceName The namespace name.
+     *
+     * @param {string} notificationHubName The notification hub name.
+     *
+     * @param {object} parameters Parameters supplied to the create/update a
+     * NotificationHub Resource.
+     *
+     * @param {string} [parameters.notificationHubName] The NotificationHub name.
+     *
+     * @param {string} [parameters.registrationTtl] The RegistrationTtl of the
+     * created NotificationHub
+     *
+     * @param {array} [parameters.authorizationRules] The AuthorizationRules of the
+     * created NotificationHub
+     *
+     * @param {object} [parameters.apnsCredential] The ApnsCredential of the
+     * created NotificationHub
+     *
+     * @param {string} [parameters.apnsCredential.apnsCertificate] The APNS
+     * certificate.
+     *
+     * @param {string} [parameters.apnsCredential.certificateKey] The certificate
+     * key.
+     *
+     * @param {string} [parameters.apnsCredential.endpoint] The endpoint of this
+     * credential.
+     *
+     * @param {string} [parameters.apnsCredential.thumbprint] The Apns certificate
+     * Thumbprint
+     *
+     * @param {string} [parameters.apnsCredential.keyId] A 10-character key
+     * identifier (kid) key, obtained from your developer account
+     *
+     * @param {string} [parameters.apnsCredential.bundleId] Id that uniquely
+     * identifies an Application Bundle on a device or simulator
+     *
+     * @param {string} [parameters.apnsCredential.teamId] A unique 10 character
+     * string generated by Apple thats assigned to your team
+     *
+     * @param {string} [parameters.apnsCredential.token] Provider Authentication
+     * Token, obtained through your developer account
+     *
+     * @param {object} [parameters.wnsCredential] The WnsCredential of the created
+     * NotificationHub
+     *
+     * @param {string} [parameters.wnsCredential.packageSid] The package ID for
+     * this credential.
+     *
+     * @param {string} [parameters.wnsCredential.secretKey] The secret key.
+     *
+     * @param {string} [parameters.wnsCredential.windowsLiveEndpoint] The Windows
+     * Live endpoint.
+     *
+     * @param {object} [parameters.gcmCredential] The GcmCredential of the created
+     * NotificationHub
+     *
+     * @param {string} [parameters.gcmCredential.gcmEndpoint] The GCM endpoint.
+     *
+     * @param {string} [parameters.gcmCredential.googleApiKey] The Google API key.
+     *
+     * @param {object} [parameters.mpnsCredential] The MpnsCredential of the
+     * created NotificationHub
+     *
+     * @param {string} [parameters.mpnsCredential.mpnsCertificate] The MPNS
+     * certificate.
+     *
+     * @param {string} [parameters.mpnsCredential.certificateKey] The certificate
+     * key for this credential.
+     *
+     * @param {string} [parameters.mpnsCredential.thumbprint] The Mpns certificate
+     * Thumbprint
+     *
+     * @param {object} [parameters.admCredential] The AdmCredential of the created
+     * NotificationHub
+     *
+     * @param {string} [parameters.admCredential.clientId] The client identifier.
+     *
+     * @param {string} [parameters.admCredential.clientSecret] The credential
+     * secret access key.
+     *
+     * @param {string} [parameters.admCredential.authTokenUrl] The URL of the
+     * authorization token.
+     *
+     * @param {object} [parameters.baiduCredential] The BaiduCredential of the
+     * created NotificationHub
+     *
+     * @param {string} [parameters.baiduCredential.baiduApiKey] Baidu Api Key.
+     *
+     * @param {string} [parameters.baiduCredential.baiduEndPoint] Baidu Endpoint.
+     *
+     * @param {string} [parameters.baiduCredential.baiduSecretKey] Baidu Secret Key
+     *
+     * @param {object} [parameters.sku] The sku of the created namespace
+     *
+     * @param {string} parameters.sku.name Name of the notification hub sku.
+     * Possible values include: 'Free', 'Basic', 'Standard'
+     *
+     * @param {string} [parameters.sku.tier] The tier of particular sku
+     *
+     * @param {string} [parameters.sku.size] The Sku size
+     *
+     * @param {string} [parameters.sku.family] The Sku Family
+     *
+     * @param {number} [parameters.sku.capacity] The capacity of the resource
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {NotificationHub} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {NotificationHub} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link NotificationHub} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    createOrUpdate(resourceGroupName: string, namespaceName: string, notificationHubName: string, parameters: models.NotificationHub, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.NotificationHub>;
+    createOrUpdate(resourceGroupName: string, namespaceName: string, notificationHubName: string, parameters: models.NotificationHub, callback: ServiceCallback<models.NotificationHub>): void;
+    createOrUpdate(resourceGroupName: string, namespaceName: string, notificationHubName: string, parameters: models.NotificationHub, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.NotificationHub>): void;
+
+
+    /**
+     * Updates a NotificationHub in a namespace.
+     *
+     * @param {string} resourceGroupName The name of the resource group.
+     *
+     * @param {string} namespaceName The namespace name.
+     *
+     * @param {string} notificationHubName The notification hub name.
+     *
+     * @param {object} parameters Parameters supplied to the create/update a
+     * NotificationHub Resource.
+     *
+     * @param {array} [parameters.authorizationRules] The AuthorizationRules of the
+     * created NotificationHub
+     *
+     * @param {object} [parameters.apnsCredential] The ApnsCredential of the
+     * created NotificationHub
+     *
+     * @param {string} [parameters.apnsCredential.apnsCertificate] The APNS
+     * certificate.
+     *
+     * @param {string} [parameters.apnsCredential.certificateKey] The certificate
+     * key.
+     *
+     * @param {string} [parameters.apnsCredential.endpoint] The endpoint of this
+     * credential.
+     *
+     * @param {string} [parameters.apnsCredential.thumbprint] The Apns certificate
+     * Thumbprint
+     *
+     * @param {string} [parameters.apnsCredential.keyId] A 10-character key
+     * identifier (kid) key, obtained from your developer account
+     *
+     * @param {string} [parameters.apnsCredential.bundleId] Id that uniquely
+     * identifies an Application Bundle on a device or simulator
+     *
+     * @param {string} [parameters.apnsCredential.teamId] A unique 10 character
+     * string generated by Apple thats assigned to your team
+     *
+     * @param {string} [parameters.apnsCredential.token] Provider Authentication
+     * Token, obtained through your developer account
+     *
+     * @param {object} [parameters.wnsCredential] The WnsCredential of the created
+     * NotificationHub
+     *
+     * @param {string} [parameters.wnsCredential.packageSid] The package ID for
+     * this credential.
+     *
+     * @param {string} [parameters.wnsCredential.secretKey] The secret key.
+     *
+     * @param {string} [parameters.wnsCredential.windowsLiveEndpoint] The Windows
+     * Live endpoint.
+     *
+     * @param {object} [parameters.gcmCredential] The GcmCredential of the created
+     * NotificationHub
+     *
+     * @param {string} [parameters.gcmCredential.gcmEndpoint] The GCM endpoint.
+     *
+     * @param {string} [parameters.gcmCredential.googleApiKey] The Google API key.
+     *
+     * @param {object} [parameters.mpnsCredential] The MpnsCredential of the
+     * created NotificationHub
+     *
+     * @param {string} [parameters.mpnsCredential.mpnsCertificate] The MPNS
+     * certificate.
+     *
+     * @param {string} [parameters.mpnsCredential.certificateKey] The certificate
+     * key for this credential.
+     *
+     * @param {string} [parameters.mpnsCredential.thumbprint] The Mpns certificate
+     * Thumbprint
+     *
+     * @param {object} [parameters.admCredential] The AdmCredential of the created
+     * NotificationHub
+     *
+     * @param {string} [parameters.admCredential.clientId] The client identifier.
+     *
+     * @param {string} [parameters.admCredential.clientSecret] The credential
+     * secret access key.
+     *
+     * @param {string} [parameters.admCredential.authTokenUrl] The URL of the
+     * authorization token.
+     *
+     * @param {object} [parameters.baiduCredential] The BaiduCredential of the
+     * created NotificationHub
+     *
+     * @param {string} [parameters.baiduCredential.baiduApiKey] Baidu Api Key.
+     *
+     * @param {string} [parameters.baiduCredential.baiduEndPoint] Baidu Endpoint.
+     *
+     * @param {string} [parameters.baiduCredential.baiduSecretKey] Baidu Secret Key
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<NotificationHub>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
+     */
+    updateWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, notificationHubName: string, parameters: models.NotificationHubPatchParameters, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.NotificationHub>>;
+
+    /**
+     * Updates a NotificationHub in a namespace.
+     *
+     * @param {string} resourceGroupName The name of the resource group.
+     *
+     * @param {string} namespaceName The namespace name.
+     *
+     * @param {string} notificationHubName The notification hub name.
+     *
+     * @param {object} parameters Parameters supplied to the create/update a
+     * NotificationHub Resource.
+     *
+     * @param {array} [parameters.authorizationRules] The AuthorizationRules of the
+     * created NotificationHub
+     *
+     * @param {object} [parameters.apnsCredential] The ApnsCredential of the
+     * created NotificationHub
+     *
+     * @param {string} [parameters.apnsCredential.apnsCertificate] The APNS
+     * certificate.
+     *
+     * @param {string} [parameters.apnsCredential.certificateKey] The certificate
+     * key.
+     *
+     * @param {string} [parameters.apnsCredential.endpoint] The endpoint of this
+     * credential.
+     *
+     * @param {string} [parameters.apnsCredential.thumbprint] The Apns certificate
+     * Thumbprint
+     *
+     * @param {string} [parameters.apnsCredential.keyId] A 10-character key
+     * identifier (kid) key, obtained from your developer account
+     *
+     * @param {string} [parameters.apnsCredential.bundleId] Id that uniquely
+     * identifies an Application Bundle on a device or simulator
+     *
+     * @param {string} [parameters.apnsCredential.teamId] A unique 10 character
+     * string generated by Apple thats assigned to your team
+     *
+     * @param {string} [parameters.apnsCredential.token] Provider Authentication
+     * Token, obtained through your developer account
+     *
+     * @param {object} [parameters.wnsCredential] The WnsCredential of the created
+     * NotificationHub
+     *
+     * @param {string} [parameters.wnsCredential.packageSid] The package ID for
+     * this credential.
+     *
+     * @param {string} [parameters.wnsCredential.secretKey] The secret key.
+     *
+     * @param {string} [parameters.wnsCredential.windowsLiveEndpoint] The Windows
+     * Live endpoint.
+     *
+     * @param {object} [parameters.gcmCredential] The GcmCredential of the created
+     * NotificationHub
+     *
+     * @param {string} [parameters.gcmCredential.gcmEndpoint] The GCM endpoint.
+     *
+     * @param {string} [parameters.gcmCredential.googleApiKey] The Google API key.
+     *
+     * @param {object} [parameters.mpnsCredential] The MpnsCredential of the
+     * created NotificationHub
+     *
+     * @param {string} [parameters.mpnsCredential.mpnsCertificate] The MPNS
+     * certificate.
+     *
+     * @param {string} [parameters.mpnsCredential.certificateKey] The certificate
+     * key for this credential.
+     *
+     * @param {string} [parameters.mpnsCredential.thumbprint] The Mpns certificate
+     * Thumbprint
+     *
+     * @param {object} [parameters.admCredential] The AdmCredential of the created
+     * NotificationHub
+     *
+     * @param {string} [parameters.admCredential.clientId] The client identifier.
+     *
+     * @param {string} [parameters.admCredential.clientSecret] The credential
+     * secret access key.
+     *
+     * @param {string} [parameters.admCredential.authTokenUrl] The URL of the
+     * authorization token.
+     *
+     * @param {object} [parameters.baiduCredential] The BaiduCredential of the
+     * created NotificationHub
+     *
+     * @param {string} [parameters.baiduCredential.baiduApiKey] Baidu Api Key.
+     *
+     * @param {string} [parameters.baiduCredential.baiduEndPoint] Baidu Endpoint.
+     *
+     * @param {string} [parameters.baiduCredential.baiduSecretKey] Baidu Secret Key
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {NotificationHub} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {NotificationHub} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link NotificationHub} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    update(resourceGroupName: string, namespaceName: string, notificationHubName: string, parameters: models.NotificationHubPatchParameters, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.NotificationHub>;
+    update(resourceGroupName: string, namespaceName: string, notificationHubName: string, parameters: models.NotificationHubPatchParameters, callback: ServiceCallback<models.NotificationHub>): void;
+    update(resourceGroupName: string, namespaceName: string, notificationHubName: string, parameters: models.NotificationHubPatchParameters, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.NotificationHub>): void;
+
+
+    /**
+     * Deletes a notification hub associated with a namespace.
+     *
+     * @param {string} resourceGroupName The name of the resource group.
+     *
+     * @param {string} namespaceName The namespace name.
+     *
+     * @param {string} notificationHubName The notification hub name.
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
+     */
+    deleteMethodWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, notificationHubName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Deletes a notification hub associated with a namespace.
+     *
+     * @param {string} resourceGroupName The name of the resource group.
+     *
+     * @param {string} namespaceName The namespace name.
+     *
+     * @param {string} notificationHubName The notification hub name.
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    deleteMethod(resourceGroupName: string, namespaceName: string, notificationHubName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
+    deleteMethod(resourceGroupName: string, namespaceName: string, notificationHubName: string, callback: ServiceCallback<void>): void;
+    deleteMethod(resourceGroupName: string, namespaceName: string, notificationHubName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
+
+    /**
+     * Lists the notification hubs associated with a namespace.
+     *
+     * @param {string} resourceGroupName The name of the resource group.
+     *
+     * @param {string} namespaceName The namespace name.
+     *
+     * @param {string} notificationHubName The notification hub name.
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<NotificationHub>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
+     */
+    getWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, notificationHubName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.NotificationHub>>;
+
+    /**
+     * Lists the notification hubs associated with a namespace.
+     *
+     * @param {string} resourceGroupName The name of the resource group.
+     *
+     * @param {string} namespaceName The namespace name.
+     *
+     * @param {string} notificationHubName The notification hub name.
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {NotificationHub} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {NotificationHub} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link NotificationHub} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get(resourceGroupName: string, namespaceName: string, notificationHubName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.NotificationHub>;
+    get(resourceGroupName: string, namespaceName: string, notificationHubName: string, callback: ServiceCallback<models.NotificationHub>): void;
+    get(resourceGroupName: string, namespaceName: string, notificationHubName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.NotificationHub>): void;
+
+
+    /**
+     * Lists the notification hubs associated with a namespace.
+     *
+     * @param {string} resourceGroupName The name of the resource group.
+     *
+     * @param {string} namespaceName The namespace name.
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<NotificationHubListResult>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
+     */
+    listByNamespaceWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.NotificationHubListResult>>;
+
+    /**
+     * Lists the notification hubs associated with a namespace.
+     *
+     * @param {string} resourceGroupName The name of the resource group.
+     *
+     * @param {string} namespaceName The namespace name.
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {NotificationHubListResult} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {NotificationHubListResult} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link NotificationHubListResult} for more
+     *                      information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    listByNamespace(resourceGroupName: string, namespaceName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.NotificationHubListResult>;
+    listByNamespace(resourceGroupName: string, namespaceName: string, callback: ServiceCallback<models.NotificationHubListResult>): void;
+    listByNamespace(resourceGroupName: string, namespaceName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.NotificationHubListResult>): void;
+
+
+    /**
+     * Gets the Primary and Secondary ConnectionStrings to the NotificationHub
+     *
+     * @param {string} resourceGroupName The name of the resource group.
+     *
+     * @param {string} namespaceName The namespace name.
+     *
+     * @param {string} notificationHubName The notification hub name.
+     *
+     * @param {string} authorizationRuleName The connection string of the
+     * NotificationHub for the specified authorizationRule.
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ResourceListKeys>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
+     */
+    listKeysWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, notificationHubName: string, authorizationRuleName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ResourceListKeys>>;
+
+    /**
+     * Gets the Primary and Secondary ConnectionStrings to the NotificationHub
+     *
+     * @param {string} resourceGroupName The name of the resource group.
+     *
+     * @param {string} namespaceName The namespace name.
+     *
+     * @param {string} notificationHubName The notification hub name.
+     *
+     * @param {string} authorizationRuleName The connection string of the
+     * NotificationHub for the specified authorizationRule.
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ResourceListKeys} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ResourceListKeys} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ResourceListKeys} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    listKeys(resourceGroupName: string, namespaceName: string, notificationHubName: string, authorizationRuleName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ResourceListKeys>;
+    listKeys(resourceGroupName: string, namespaceName: string, notificationHubName: string, authorizationRuleName: string, callback: ServiceCallback<models.ResourceListKeys>): void;
+    listKeys(resourceGroupName: string, namespaceName: string, notificationHubName: string, authorizationRuleName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ResourceListKeys>): void;
+
+
+    /**
      * Lists the PNS Credentials associated with a notification hub .
      *
      * @param {string} resourceGroupName The name of the resource group.
@@ -2505,7 +2358,7 @@ export interface NotificationHubs {
      *
      * @reject {Error|ServiceError} - The error object.
      */
-    listNextWithHttpOperationResponse(nextPageLink: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.NotificationHubListResult>>;
+    listByNamespaceNextWithHttpOperationResponse(nextPageLink: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.NotificationHubListResult>>;
 
     /**
      * Lists the notification hubs associated with a namespace.
@@ -2541,88 +2394,47 @@ export interface NotificationHubs {
      *
      *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
      */
-    listNext(nextPageLink: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.NotificationHubListResult>;
-    listNext(nextPageLink: string, callback: ServiceCallback<models.NotificationHubListResult>): void;
-    listNext(nextPageLink: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.NotificationHubListResult>): void;
-
-
-    /**
-     * Gets the authorization rules for a NotificationHub.
-     *
-     * @param {string} nextPageLink The NextLink from the previous successful call
-     * to List operation.
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @returns {Promise} A promise is returned
-     *
-     * @resolve {HttpOperationResponse<SharedAccessAuthorizationRuleListResult>} - The deserialized result object.
-     *
-     * @reject {Error|ServiceError} - The error object.
-     */
-    listAuthorizationRulesNextWithHttpOperationResponse(nextPageLink: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.SharedAccessAuthorizationRuleListResult>>;
-
-    /**
-     * Gets the authorization rules for a NotificationHub.
-     *
-     * @param {string} nextPageLink The NextLink from the previous successful call
-     * to List operation.
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @param {ServiceCallback} [optionalCallback] - The optional callback.
-     *
-     * @returns {ServiceCallback|Promise} If a callback was passed as the last
-     * parameter then it returns the callback else returns a Promise.
-     *
-     * {Promise} A promise is returned.
-     *
-     *                      @resolve {SharedAccessAuthorizationRuleListResult} - The deserialized result object.
-     *
-     *                      @reject {Error|ServiceError} - The error object.
-     *
-     * {ServiceCallback} optionalCallback(err, result, request, response)
-     *
-     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {SharedAccessAuthorizationRuleListResult} [result]   - The deserialized result object if an error did not occur.
-     *                      See {@link SharedAccessAuthorizationRuleListResult} for
-     *                      more information.
-     *
-     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
-     */
-    listAuthorizationRulesNext(nextPageLink: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.SharedAccessAuthorizationRuleListResult>;
-    listAuthorizationRulesNext(nextPageLink: string, callback: ServiceCallback<models.SharedAccessAuthorizationRuleListResult>): void;
-    listAuthorizationRulesNext(nextPageLink: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SharedAccessAuthorizationRuleListResult>): void;
+    listByNamespaceNext(nextPageLink: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.NotificationHubListResult>;
+    listByNamespaceNext(nextPageLink: string, callback: ServiceCallback<models.NotificationHubListResult>): void;
+    listByNamespaceNext(nextPageLink: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.NotificationHubListResult>): void;
 }
 
 /**
  * @class
- * Hubs
+ * HubAuthorizationRules
  * __NOTE__: An instance of this class is automatically created for an
  * instance of the NotificationHubsManagementClient.
  */
-export interface Hubs {
+export interface HubAuthorizationRules {
 
 
     /**
-     * Checks the availability of the given notificationHub in a namespace.
+     * Creates/Updates an authorization rule for a NotificationHub
      *
      * @param {string} resourceGroupName The name of the resource group.
      *
      * @param {string} namespaceName The namespace name.
      *
-     * @param {object} parameters The notificationHub name.
+     * @param {string} notificationHubName The notification hub name.
      *
-     * @param {string} parameters.name Resource name
+     * @param {string} authorizationRuleName Authorization Rule Name.
+     *
+     * @param {object} parameters The shared access authorization rule.
+     *
+     * @param {array} [parameters.rights] The rights associated with the rule.
+     *
+     * @param {object} [parameters.sku] The sku of the created namespace
+     *
+     * @param {string} parameters.sku.name Name of the notification hub sku.
+     * Possible values include: 'Free', 'Basic', 'Standard'
+     *
+     * @param {string} [parameters.sku.tier] The tier of particular sku
+     *
+     * @param {string} [parameters.sku.size] The Sku size
+     *
+     * @param {string} [parameters.sku.family] The Sku Family
+     *
+     * @param {number} [parameters.sku.capacity] The capacity of the resource
      *
      * @param {object} [options] Optional Parameters.
      *
@@ -2631,22 +2443,39 @@ export interface Hubs {
      *
      * @returns {Promise} A promise is returned
      *
-     * @resolve {HttpOperationResponse<CheckNameAvailabilityResponse>} - The deserialized result object.
+     * @resolve {HttpOperationResponse<SharedAccessAuthorizationRule>} - The deserialized result object.
      *
      * @reject {Error|ServiceError} - The error object.
      */
-    checkAvailabilityWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, parameters: models.CheckNameAvailabilityRequestParameters, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.CheckNameAvailabilityResponse>>;
+    createOrUpdateWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, notificationHubName: string, authorizationRuleName: string, parameters: models.SharedAccessAuthorizationRule, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.SharedAccessAuthorizationRule>>;
 
     /**
-     * Checks the availability of the given notificationHub in a namespace.
+     * Creates/Updates an authorization rule for a NotificationHub
      *
      * @param {string} resourceGroupName The name of the resource group.
      *
      * @param {string} namespaceName The namespace name.
      *
-     * @param {object} parameters The notificationHub name.
+     * @param {string} notificationHubName The notification hub name.
      *
-     * @param {string} parameters.name Resource name
+     * @param {string} authorizationRuleName Authorization Rule Name.
+     *
+     * @param {object} parameters The shared access authorization rule.
+     *
+     * @param {array} [parameters.rights] The rights associated with the rule.
+     *
+     * @param {object} [parameters.sku] The sku of the created namespace
+     *
+     * @param {string} parameters.sku.name Name of the notification hub sku.
+     * Possible values include: 'Free', 'Basic', 'Standard'
+     *
+     * @param {string} [parameters.sku.tier] The tier of particular sku
+     *
+     * @param {string} [parameters.sku.size] The Sku size
+     *
+     * @param {string} [parameters.sku.family] The Sku Family
+     *
+     * @param {number} [parameters.sku.capacity] The capacity of the resource
      *
      * @param {object} [options] Optional Parameters.
      *
@@ -2660,7 +2489,7 @@ export interface Hubs {
      *
      * {Promise} A promise is returned.
      *
-     *                      @resolve {CheckNameAvailabilityResponse} - The deserialized result object.
+     *                      @resolve {SharedAccessAuthorizationRule} - The deserialized result object.
      *
      *                      @reject {Error|ServiceError} - The error object.
      *
@@ -2668,15 +2497,149 @@ export interface Hubs {
      *
      *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
      *
-     *                      {CheckNameAvailabilityResponse} [result]   - The deserialized result object if an error did not occur.
-     *                      See {@link CheckNameAvailabilityResponse} for more
+     *                      {SharedAccessAuthorizationRule} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link SharedAccessAuthorizationRule} for more
      *                      information.
      *
      *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
      *
      *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
      */
-    checkAvailability(resourceGroupName: string, namespaceName: string, parameters: models.CheckNameAvailabilityRequestParameters, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.CheckNameAvailabilityResponse>;
-    checkAvailability(resourceGroupName: string, namespaceName: string, parameters: models.CheckNameAvailabilityRequestParameters, callback: ServiceCallback<models.CheckNameAvailabilityResponse>): void;
-    checkAvailability(resourceGroupName: string, namespaceName: string, parameters: models.CheckNameAvailabilityRequestParameters, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.CheckNameAvailabilityResponse>): void;
+    createOrUpdate(resourceGroupName: string, namespaceName: string, notificationHubName: string, authorizationRuleName: string, parameters: models.SharedAccessAuthorizationRule, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.SharedAccessAuthorizationRule>;
+    createOrUpdate(resourceGroupName: string, namespaceName: string, notificationHubName: string, authorizationRuleName: string, parameters: models.SharedAccessAuthorizationRule, callback: ServiceCallback<models.SharedAccessAuthorizationRule>): void;
+    createOrUpdate(resourceGroupName: string, namespaceName: string, notificationHubName: string, authorizationRuleName: string, parameters: models.SharedAccessAuthorizationRule, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SharedAccessAuthorizationRule>): void;
+
+
+    /**
+     * Deletes a notificationHub authorization rule
+     *
+     * @param {string} resourceGroupName The name of the resource group.
+     *
+     * @param {string} namespaceName The namespace name.
+     *
+     * @param {string} notificationHubName The notification hub name.
+     *
+     * @param {string} authorizationRuleName Authorization Rule Name.
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
+     */
+    deleteMethodWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, notificationHubName: string, authorizationRuleName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Deletes a notificationHub authorization rule
+     *
+     * @param {string} resourceGroupName The name of the resource group.
+     *
+     * @param {string} namespaceName The namespace name.
+     *
+     * @param {string} notificationHubName The notification hub name.
+     *
+     * @param {string} authorizationRuleName Authorization Rule Name.
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    deleteMethod(resourceGroupName: string, namespaceName: string, notificationHubName: string, authorizationRuleName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
+    deleteMethod(resourceGroupName: string, namespaceName: string, notificationHubName: string, authorizationRuleName: string, callback: ServiceCallback<void>): void;
+    deleteMethod(resourceGroupName: string, namespaceName: string, notificationHubName: string, authorizationRuleName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
+
+    /**
+     * Gets an authorization rule for a NotificationHub by name.
+     *
+     * @param {string} resourceGroupName The name of the resource group.
+     *
+     * @param {string} namespaceName The namespace name
+     *
+     * @param {string} notificationHubName The notification hub name.
+     *
+     * @param {string} authorizationRuleName authorization rule name.
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<SharedAccessAuthorizationRule>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
+     */
+    getWithHttpOperationResponse(resourceGroupName: string, namespaceName: string, notificationHubName: string, authorizationRuleName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.SharedAccessAuthorizationRule>>;
+
+    /**
+     * Gets an authorization rule for a NotificationHub by name.
+     *
+     * @param {string} resourceGroupName The name of the resource group.
+     *
+     * @param {string} namespaceName The namespace name
+     *
+     * @param {string} notificationHubName The notification hub name.
+     *
+     * @param {string} authorizationRuleName authorization rule name.
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {SharedAccessAuthorizationRule} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {SharedAccessAuthorizationRule} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link SharedAccessAuthorizationRule} for more
+     *                      information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get(resourceGroupName: string, namespaceName: string, notificationHubName: string, authorizationRuleName: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.SharedAccessAuthorizationRule>;
+    get(resourceGroupName: string, namespaceName: string, notificationHubName: string, authorizationRuleName: string, callback: ServiceCallback<models.SharedAccessAuthorizationRule>): void;
+    get(resourceGroupName: string, namespaceName: string, notificationHubName: string, authorizationRuleName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SharedAccessAuthorizationRule>): void;
 }

@@ -35,6 +35,8 @@ export interface CheckNameAvailabilityRequestParameters {
  * @class
  * Initializes a new instance of the CheckNameAvailabilityResponse class.
  * @constructor
+ * Response containing the status of namespace availability
+ *
  * @member {boolean} [nameAvailable] Checks if the namespace name is available
  * @member {string} [reason] States the reason due to which the namespace name
  * is not available
@@ -79,6 +81,7 @@ export interface Sku {
  * @member {string} name Resource name
  * @member {string} [type] Resource type
  * @member {string} location Resource location
+ * @member {string} [kind] Resource kind
  * @member {object} [tags] Resource tags
  * @member {object} [sku] The sku of the created namespace
  * @member {string} [sku.name] Name of the notification hub sku. Possible
@@ -95,91 +98,10 @@ export interface CheckAvailabilityParameters {
   name: string;
   readonly type?: string;
   location: string;
+  kind?: string;
   tags?: { [propertyName: string]: string };
   sku?: Sku;
   isAvailiable?: boolean;
-}
-
-/**
- * @class
- * Initializes a new instance of the Resource class.
- * @constructor
- * @member {string} [id] Resource Id
- * @member {string} [name] Resource name
- * @member {string} [type] Resource type
- * @member {string} location Resource location
- * @member {object} [tags] Resource tags
- * @member {object} [sku] The sku of the created namespace
- * @member {string} [sku.name] Name of the notification hub sku. Possible
- * values include: 'Free', 'Basic', 'Standard'
- * @member {string} [sku.tier] The tier of particular sku
- * @member {string} [sku.size] The Sku size
- * @member {string} [sku.family] The Sku Family
- * @member {number} [sku.capacity] The capacity of the resource
- */
-export interface Resource extends BaseResource {
-  readonly id?: string;
-  readonly name?: string;
-  readonly type?: string;
-  location: string;
-  tags?: { [propertyName: string]: string };
-  sku?: Sku;
-}
-
-/**
- * @class
- * Initializes a new instance of the CheckAvailabilityResult class.
- * @constructor
- * Description of a CheckAvailibility resource.
- *
- * @member {boolean} [isAvailiable] True if the name is available and can be
- * used to create new Namespace/NotificationHub. Otherwise false.
- */
-export interface CheckAvailabilityResult extends Resource {
-  isAvailiable?: boolean;
-}
-
-/**
- * @class
- * Initializes a new instance of the NamespaceCreateOrUpdateParameters class.
- * @constructor
- * Parameters supplied to the CreateOrUpdate Namespace operation.
- *
- * @member {string} [namespaceCreateOrUpdateParametersName] The name of the
- * namespace.
- * @member {string} [provisioningState] Provisioning state of the Namespace.
- * @member {string} [region] Specifies the targeted region in which the
- * namespace should be created. It can be any of the following values:
- * Australia EastAustralia SoutheastCentral USEast USEast US 2West USNorth
- * Central USSouth Central USEast AsiaSoutheast AsiaBrazil SouthJapan EastJapan
- * WestNorth EuropeWest Europe
- * @member {string} [status] Status of the namespace. It can be any of these
- * values:1 = Created/Active2 = Creating3 = Suspended4 = Deleting
- * @member {date} [createdAt] The time the namespace was created.
- * @member {string} [serviceBusEndpoint] Endpoint you can use to perform
- * NotificationHub operations.
- * @member {string} [subscriptionId] The Id of the Azure subscription
- * associated with the namespace.
- * @member {string} [scaleUnit] ScaleUnit where the namespace gets created
- * @member {boolean} [enabled] Whether or not the namespace is currently
- * enabled.
- * @member {boolean} [critical] Whether or not the namespace is set as
- * Critical.
- * @member {string} [namespaceType] The namespace type. Possible values
- * include: 'Messaging', 'NotificationHub'
- */
-export interface NamespaceCreateOrUpdateParameters extends Resource {
-  namespaceCreateOrUpdateParametersName?: string;
-  provisioningState?: string;
-  region?: string;
-  status?: string;
-  createdAt?: Date;
-  serviceBusEndpoint?: string;
-  subscriptionId?: string;
-  scaleUnit?: string;
-  enabled?: boolean;
-  critical?: boolean;
-  namespaceType?: string;
 }
 
 /**
@@ -199,6 +121,24 @@ export interface NamespaceCreateOrUpdateParameters extends Resource {
  */
 export interface NamespacePatchParameters {
   tags?: { [propertyName: string]: string };
+  sku?: Sku;
+}
+
+/**
+ * @class
+ * Initializes a new instance of the NHResource class.
+ * @constructor
+ * The properties of the resource
+ *
+ * @member {object} [sku] The sku of the created namespace
+ * @member {string} [sku.name] Name of the notification hub sku. Possible
+ * values include: 'Free', 'Basic', 'Standard'
+ * @member {string} [sku.tier] The tier of particular sku
+ * @member {string} [sku.size] The Sku size
+ * @member {string} [sku.family] The Sku Family
+ * @member {number} [sku.capacity] The capacity of the resource
+ */
+export interface NHResource extends BaseResource {
   sku?: Sku;
 }
 
@@ -230,7 +170,7 @@ export interface NamespacePatchParameters {
  * @member {string} [namespaceType] The namespace type. Possible values
  * include: 'Messaging', 'NotificationHub'
  */
-export interface NamespaceResource extends Resource {
+export interface NamespaceResource extends NHResource {
   namespaceResourceName?: string;
   provisioningState?: string;
   region?: string;
@@ -258,26 +198,13 @@ export interface SharedAccessAuthorizationRuleProperties {
 
 /**
  * @class
- * Initializes a new instance of the SharedAccessAuthorizationRuleCreateOrUpdateParameters class.
- * @constructor
- * Parameters supplied to the CreateOrUpdate Namespace AuthorizationRules.
- *
- * @member {object} properties Properties of the Namespace AuthorizationRules.
- * @member {array} [properties.rights] The rights associated with the rule.
- */
-export interface SharedAccessAuthorizationRuleCreateOrUpdateParameters extends Resource {
-  properties: SharedAccessAuthorizationRuleProperties;
-}
-
-/**
- * @class
- * Initializes a new instance of the SharedAccessAuthorizationRuleResource class.
+ * Initializes a new instance of the SharedAccessAuthorizationRule class.
  * @constructor
  * Description of a Namespace AuthorizationRules.
  *
  * @member {array} [rights] The rights associated with the rule.
  */
-export interface SharedAccessAuthorizationRuleResource extends Resource {
+export interface SharedAccessAuthorizationRule extends NHResource {
   rights?: string[];
 }
 
@@ -330,9 +257,10 @@ export interface PolicykeyResource {
  * @member {string} [thumbprint] The Apns certificate Thumbprint
  * @member {string} [keyId] A 10-character key identifier (kid) key, obtained
  * from your developer account
- * @member {string} [appName] The name of the application
- * @member {string} [appId] The issuer (iss) registered claim key, whose value
- * is your 10-character Team ID, obtained from your developer account
+ * @member {string} [bundleId] Id that uniquely identifies an Application
+ * Bundle on a device or simulator
+ * @member {string} [teamId] A unique 10 character string generated by Apple
+ * thats assigned to your team
  * @member {string} [token] Provider Authentication Token, obtained through
  * your developer account
  */
@@ -342,8 +270,8 @@ export interface ApnsCredential {
   endpoint?: string;
   thumbprint?: string;
   keyId?: string;
-  appName?: string;
-  appId?: string;
+  bundleId?: string;
+  teamId?: string;
   token?: string;
 }
 
@@ -427,14 +355,10 @@ export interface BaiduCredential {
 
 /**
  * @class
- * Initializes a new instance of the NotificationHubCreateOrUpdateParameters class.
+ * Initializes a new instance of the NotificationHubPatchParameters class.
  * @constructor
- * Parameters supplied to the CreateOrUpdate NotificationHub operation.
+ * NotificationHub patch parameters.
  *
- * @member {string} [notificationHubCreateOrUpdateParametersName] The
- * NotificationHub name.
- * @member {string} [registrationTtl] The RegistrationTtl of the created
- * NotificationHub
  * @member {array} [authorizationRules] The AuthorizationRules of the created
  * NotificationHub
  * @member {object} [apnsCredential] The ApnsCredential of the created
@@ -445,10 +369,10 @@ export interface BaiduCredential {
  * @member {string} [apnsCredential.thumbprint] The Apns certificate Thumbprint
  * @member {string} [apnsCredential.keyId] A 10-character key identifier (kid)
  * key, obtained from your developer account
- * @member {string} [apnsCredential.appName] The name of the application
- * @member {string} [apnsCredential.appId] The issuer (iss) registered claim
- * key, whose value is your 10-character Team ID, obtained from your developer
- * account
+ * @member {string} [apnsCredential.bundleId] Id that uniquely identifies an
+ * Application Bundle on a device or simulator
+ * @member {string} [apnsCredential.teamId] A unique 10 character string
+ * generated by Apple thats assigned to your team
  * @member {string} [apnsCredential.token] Provider Authentication Token,
  * obtained through your developer account
  * @member {object} [wnsCredential] The WnsCredential of the created
@@ -481,9 +405,7 @@ export interface BaiduCredential {
  * @member {string} [baiduCredential.baiduEndPoint] Baidu Endpoint.
  * @member {string} [baiduCredential.baiduSecretKey] Baidu Secret Key
  */
-export interface NotificationHubCreateOrUpdateParameters extends Resource {
-  notificationHubCreateOrUpdateParametersName?: string;
-  registrationTtl?: string;
+export interface NotificationHubPatchParameters {
   authorizationRules?: SharedAccessAuthorizationRuleProperties[];
   apnsCredential?: ApnsCredential;
   wnsCredential?: WnsCredential;
@@ -495,11 +417,11 @@ export interface NotificationHubCreateOrUpdateParameters extends Resource {
 
 /**
  * @class
- * Initializes a new instance of the NotificationHubResource class.
+ * Initializes a new instance of the NotificationHub class.
  * @constructor
  * Description of a NotificationHub Resource.
  *
- * @member {string} [notificationHubResourceName] The NotificationHub name.
+ * @member {string} [notificationHubName] The NotificationHub name.
  * @member {string} [registrationTtl] The RegistrationTtl of the created
  * NotificationHub
  * @member {array} [authorizationRules] The AuthorizationRules of the created
@@ -512,10 +434,10 @@ export interface NotificationHubCreateOrUpdateParameters extends Resource {
  * @member {string} [apnsCredential.thumbprint] The Apns certificate Thumbprint
  * @member {string} [apnsCredential.keyId] A 10-character key identifier (kid)
  * key, obtained from your developer account
- * @member {string} [apnsCredential.appName] The name of the application
- * @member {string} [apnsCredential.appId] The issuer (iss) registered claim
- * key, whose value is your 10-character Team ID, obtained from your developer
- * account
+ * @member {string} [apnsCredential.bundleId] Id that uniquely identifies an
+ * Application Bundle on a device or simulator
+ * @member {string} [apnsCredential.teamId] A unique 10 character string
+ * generated by Apple thats assigned to your team
  * @member {string} [apnsCredential.token] Provider Authentication Token,
  * obtained through your developer account
  * @member {object} [wnsCredential] The WnsCredential of the created
@@ -548,8 +470,8 @@ export interface NotificationHubCreateOrUpdateParameters extends Resource {
  * @member {string} [baiduCredential.baiduEndPoint] Baidu Endpoint.
  * @member {string} [baiduCredential.baiduSecretKey] Baidu Secret Key
  */
-export interface NotificationHubResource extends Resource {
-  notificationHubResourceName?: string;
+export interface NotificationHub extends NHResource {
+  notificationHubName?: string;
   registrationTtl?: string;
   authorizationRules?: SharedAccessAuthorizationRuleProperties[];
   apnsCredential?: ApnsCredential;
@@ -574,10 +496,10 @@ export interface NotificationHubResource extends Resource {
  * @member {string} [apnsCredential.thumbprint] The Apns certificate Thumbprint
  * @member {string} [apnsCredential.keyId] A 10-character key identifier (kid)
  * key, obtained from your developer account
- * @member {string} [apnsCredential.appName] The name of the application
- * @member {string} [apnsCredential.appId] The issuer (iss) registered claim
- * key, whose value is your 10-character Team ID, obtained from your developer
- * account
+ * @member {string} [apnsCredential.bundleId] Id that uniquely identifies an
+ * Application Bundle on a device or simulator
+ * @member {string} [apnsCredential.teamId] A unique 10 character string
+ * generated by Apple thats assigned to your team
  * @member {string} [apnsCredential.token] Provider Authentication Token,
  * obtained through your developer account
  * @member {object} [wnsCredential] The WnsCredential of the created
@@ -610,7 +532,7 @@ export interface NotificationHubResource extends Resource {
  * @member {string} [baiduCredential.baiduEndPoint] Baidu Endpoint.
  * @member {string} [baiduCredential.baiduSecretKey] Baidu Secret Key
  */
-export interface PnsCredentialsResource extends Resource {
+export interface PnsCredentialsResource extends NHResource {
   apnsCredential?: ApnsCredential;
   wnsCredential?: WnsCredential;
   gcmCredential?: GcmCredential;
@@ -623,10 +545,55 @@ export interface PnsCredentialsResource extends Resource {
  * @class
  * Initializes a new instance of the SubResource class.
  * @constructor
+ * The properties of subresource
+ *
  * @member {string} [id] Resource Id
  */
 export interface SubResource extends BaseResource {
   id?: string;
+}
+
+/**
+ * @class
+ * Initializes a new instance of the Resource class.
+ * @constructor
+ * Azure Resource base model type.
+ *
+ * @member {string} [id] Fully qualified resource Id for the resource. Ex -
+ * /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+ * @member {string} [name] The name of the resource
+ * @member {string} [type] The type of the resource. Ex-
+ * Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.
+ */
+export interface Resource extends BaseResource {
+  readonly id?: string;
+  readonly name?: string;
+  readonly type?: string;
+}
+
+/**
+ * @class
+ * Initializes a new instance of the ProxyResource class.
+ * @constructor
+ * The resource model definition for a ARM proxy resource. It will have
+ * everything other than required location and tags
+ *
+ */
+export interface ProxyResource extends Resource {
+}
+
+/**
+ * @class
+ * Initializes a new instance of the TrackedResource class.
+ * @constructor
+ * The resource model definition for a ARM tracked top level resource
+ *
+ * @member {object} [tags] Resource tags.
+ * @member {string} location The geo-location where the resource lives
+ */
+export interface TrackedResource extends Resource {
+  tags?: { [propertyName: string]: string };
+  location: string;
 }
 
 
@@ -652,7 +619,7 @@ export interface NamespaceListResult extends Array<NamespaceResource> {
  * @member {string} [nextLink] Link to the next set of results. Not empty if
  * Value contains incomplete list of AuthorizationRules
  */
-export interface SharedAccessAuthorizationRuleListResult extends Array<SharedAccessAuthorizationRuleResource> {
+export interface SharedAccessAuthorizationRuleListResult extends Array<SharedAccessAuthorizationRule> {
   nextLink?: string;
 }
 
@@ -665,6 +632,6 @@ export interface SharedAccessAuthorizationRuleListResult extends Array<SharedAcc
  * @member {string} [nextLink] Link to the next set of results. Not empty if
  * Value contains incomplete list of NotificationHub
  */
-export interface NotificationHubListResult extends Array<NotificationHubResource> {
+export interface NotificationHubListResult extends Array<NotificationHub> {
   nextLink?: string;
 }
